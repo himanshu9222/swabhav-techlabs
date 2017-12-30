@@ -8,8 +8,6 @@ public class TestWelcome {
 			System.out.println(names.length);
 			System.out.print(names);
 		}
-	    for(String  names){
-	    	
-	    }  
+	    
 	}
 }
