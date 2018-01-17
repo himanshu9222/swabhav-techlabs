@@ -6,7 +6,7 @@ public class Student {
 			private String Lname;
 			private String Email;
 			
-			
+			@NeedRefactoryAnnotation
 			public String getName(){
 				return Fname;
 			}
