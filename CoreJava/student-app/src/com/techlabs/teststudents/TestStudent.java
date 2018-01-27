@@ -1,12 +1,14 @@
 package com.techlabs.teststudents;
 
 import java.util.ArrayList;
+
 import java.util.Scanner;
 
-import com.techlabs.students.Students;
+import com.techlabs.students.Student;
 
 public class TestStudent {
-	static ArrayList<Students> studentsList = new ArrayList<Students>();
+	static ArrayList<Student> studentsList = new ArrayList<Student>();
+	Student student=new Student();
 	Scanner sc = new Scanner(System.in);
 	static int choice;
 
@@ -31,13 +33,17 @@ public class TestStudent {
 	}
 
 	public void getStudentDetails() {
-		System.out.println("Enter the Students Details in format\n Firstname");
-		String fname = sc.nextLine();
-		System.out.println("Lastname");
-		String lname = sc.nextLine();
-		System.out.println("Address");
-		String address = sc.nextLine();
-		Students s = new Students(fname, lname, address);
+		System.out.println("Enter the Students Details in format\n Id");
+		String id = sc.nextLine();
+		System.out.println("name");
+		String name = sc.nextLine();
+		System.out.println("Email");
+		String email = sc.nextLine();
+		Student s = new Student();
+		student.setId(id);
+		student.setName(name);
+		student.setEmail(email);
+		
 		studentsList.add(s);
 		System.out.println(studentsList.size());
 

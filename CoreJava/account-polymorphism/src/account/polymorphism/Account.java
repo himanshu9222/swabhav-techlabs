@@ -2,9 +2,10 @@ package account.polymorphism;
 
 public abstract class Account {
 	protected int accno;
-	private static int accnoGenerator;
 	private String name;
 	protected double balance;
+	
+	private static int accnoGenerator;
 	protected static int countDeposit;
 	protected static int countWithdraw;
 
