@@ -11,8 +11,7 @@ public class BuildResume {
 	FileReader fileReader;
 	BufferedReader bufferedReader;
 
-	public void buildResume(ArrayList<Student> studentList)
-			throws IOException {
+	public void buildResume(ArrayList<Student> studentList) throws IOException {
 		for (Student studentDetails : studentList) {
 			fileReader = new FileReader(path + "index.html");
 			bufferedReader = new BufferedReader(fileReader);
@@ -24,8 +23,10 @@ public class BuildResume {
 			}
 
 			resumeHtml = resumeHtml.replace("$name", studentDetails.getName());
-			resumeHtml = resumeHtml.replace("$id", studentDetails.getId());
-			resumeHtml = resumeHtml.replace("$email", studentDetails.getEmail());
+			resumeHtml = resumeHtml.replace("$id", studentDetails.getId()
+					.toString());
+			resumeHtml = resumeHtml
+					.replace("$email", studentDetails.getEmail());
 
 			String fileName = studentDetails.getName() + ".html";
 			FileWriter fileWriter = new FileWriter(path + fileName);

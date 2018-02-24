@@ -6,10 +6,9 @@ import studentdetail.components.StudentConsole;
 
 public class TestStudent {
 
-	public static void main(String[] args) throws IOException,NullPointerException, ClassNotFoundException {
+	public static void main(String[] args) throws IOException,
+			NullPointerException, ClassNotFoundException {
 		StudentConsole s = new StudentConsole();
-		s.switchcase();
-
+		s.menu();
 	}
-
 }
