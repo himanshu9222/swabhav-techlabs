@@ -19,7 +19,7 @@ public class StudentSerializer {
 		objectOutputStream.writeObject(studentList);
 		objectOutputStream.close();
 		fileOutputStream.close();
-		System.out.println("Object has been serailized");
+		//System.out.println("Object has been serailized");
 	}
 
 }

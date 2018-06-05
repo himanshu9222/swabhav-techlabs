@@ -32,7 +32,7 @@ public class TestCount {
 			System.out.println("Number of Getter Method="+count.noOfGetMethod(className));
 			System.out.println("Number of Setter Method="+count.noOfSetMethod(className));
 			Class<? extends Annotation> NeedRefactoryAnnotation;
-			System.out.println("Number of Annotation="+className+" "+count.countMethodsWithAnnotation(className, NeedRefactoryAnnotation), NeedRefactoryAnnotation);
+			//System.out.println("Number of Annotation="+className+" "+count.countMethodsWithAnnotation(className, NeedRefactoryAnnotation), NeedRefactoryAnnotation);
 
 		} catch (Exception ex) {
 			ex.printStackTrace();

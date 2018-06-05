@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import studentdetail.resume.BuildResume;
+
 public class StudentConsole {
 	BuildResume build = new BuildResume();
 

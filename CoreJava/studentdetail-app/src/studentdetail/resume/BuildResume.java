@@ -1,10 +1,12 @@
-package studentdetail.components;
+package studentdetail.resume;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import studentdetail.components.Student;
 
 public class BuildResume {
 	private final String path = "src//studentdetail//resume//";
