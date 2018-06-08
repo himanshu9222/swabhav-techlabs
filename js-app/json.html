@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <h2>Store and retrieve data from local storage.</h2>
+
+    <p id="demo"></p>
+
+<script>
+    var myObj, myJSON, text, obj;
+
+    //Storing data:
+    myObj = { 
+        "name":"John", 
+        "age":31, 
+        "city":"New York" 
+    };
+    myJSON = JSON.stringify(myObj);  //When sending data to a web server, the data has to be a string.
+                                    //Convert a JavaScript object into a string with JSON.stringify().
+    localStorage.setItem("testJSON", myJSON);
+
+    //Retrieving data:
+    text = localStorage.getItem("testJSON");
+    obj = JSON.parse(text);    //parse is used convert string format from server to javascript object
+    document.getElementById("demo").innerHTML = obj.name + " "+ obj.age;
+</script>
+
+</body>
+</html>

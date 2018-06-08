@@ -1,0 +1,75 @@
+<html>
+<head>
+<style>
+     .button {
+        background-color: rgb(73, 88, 73);
+        border: none;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        border-radius: 50%;
+        }
+
+</style>
+</head>
+<body>
+
+        <button  id="buttoninput"onclick="">Start Game</button>
+        <div id="loadbutton"  ></div>
+        <div id="data"></div>
+    <script>
+        
+        (function(){
+            "use strict"
+            var randomball1=0,guess=0;
+            document.getElementById("buttoninput").addEventListener("click",displayButtons);
+            document.getElementById("buttoninput").addEventListener("click",changeRandomNumber);
+            function displayButtons(){
+                var buttonbox=document.getElementById('loadbutton');
+                buttonbox.innerHTML="";
+                for(var i=0; i<50; i++){
+                    var node = document.createElement("BUTTON");
+                    node.setAttribute("class","button")
+                    var textnode = document.createTextNode(i+1);
+                    node.value = i+1;
+                    node.appendChild(textnode);
+                    node.addEventListener("click",checkColour);
+                    buttonbox.append(node);
+                }
+            }
+            function changeRandomNumber(){
+                console.log(randomball1=Math.floor(Math.random()*50));
+            }
+            function checkColour(){
+                document.getElementById("data").innerHTML="You will get 3 attempts";
+                guess+=1;
+                console.log(this.value);
+                if(randomball1==this.value){
+                    this.setAttribute("style","background-color:#0000FF");
+                    alert("You won");
+                    clear();
+                }
+                if(randomball1<this.value){
+                    this.setAttribute("style","background-color:#00FF00");
+                }
+                if(randomball1>this.value){
+                    this.setAttribute("style","background-color:#FF0000");
+                }
+                if(guess==3){
+                    alert("Game Over");
+                    guess=0;
+                    clear();
+                }
+
+            }
+            function clear(){
+                document.getElementById('loadbutton').innerHTML="";                            
+            }
+    })();       
+    </script>
+</body>
+</html>

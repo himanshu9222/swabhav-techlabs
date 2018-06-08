@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <title>
+        Hoisting
+    </title>
+<head>
+</head>
+<body>
+    
+    <script>
+        "use strict"
+         function f1(){
+             console.log("Inside f1");
+
+             for(var counter=0;counter<=10;counter++){
+                 console.log(counter);
+             }
+
+             console.log("counter after loop"+counter);
+         }
+
+         f1();{
+             //console.log("counter outside function"+counter);
+         }
+         console.log("End of script");
+    
+    </script>
+    
+    <script>
+        //f2();
+        var f2=function(){
+            console.log("inside f2");
+        }
+        //f2();
+        f3();
+        function f3(){
+            console.log("inside f3");
+        }
+    </script>
+    
+    
+    <script>
+        var f4=function(){
+            console.log("function f4");
+        }();
+    </script>
+
+    <script>
+        (function () {
+            console.log("inside iife2");
+        })();
+
+        (function () {
+            console.log("inside iife3");
+        }())
+
+    </script>
+</body>
+</html>

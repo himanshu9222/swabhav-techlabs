@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p id="demo"></p>
+
+<script>
+
+    var outputValue = 'first string'; 
+    function host() 
+    { 
+        console.log(outputValue);
+        elemn = document.getElementById("demo");             
+        elemn.innerHTML = outputValue;    
+        var outputValue = 'local string'; 
+    }
+    host();
+
+    nonHoistedFunc();
+ 
+    var nonHoistedFunc = function () {
+        console.log("This will not work!");
+        var elemen = document.getElementById("demo");
+        elemen.innerHTML = "This will not work";
+    };
+    
+</script>
+
+</body>
+</html> 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script type="text/javascript" src="GPA.js" ></script>
+    <script type="text/javascript" src="GPB.js" ></script>
+</head>
+<body>
+        <div id="resultDiv">
+                First name: <input type="text" name="fname" id="1">
+                Last name: <input type="text" name="lname" id="2">
+                <buttton onclick="showInput();">Click me</buttton></body></br>
+        </div>
+        <script  text="text/javascript">
+        function showInput()
+        {
+            var FirstName=document.getElementById("1").value;
+            var LastName=document.getElementById("2").value;
+            document.getElementById("resultDiv").innerHTML= new swabhavTech.GPA.customer(FirstName,LastName).getFullName();
+        }
+        </script>  
+</body>
+</html>

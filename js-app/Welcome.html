@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<title> WelcomePage</title>
+<head>
+<script language="JavaScript">
+
+function showInput(){
+    var name = document.getElementById("1").value;
+    var message = document.getElementById("2");
+    message.innerHTML = message.innerHTML +"hello  "+ name +"</br>";
+}
+
+</script>
+</head>
+
+<body>
+    First name: <input type="text" name="fname" id="1">
+    <buttton onclick="showInput();">Click me</buttton></body></br>
+    <label type="text" id="2"></label>
+</body>
+</html>

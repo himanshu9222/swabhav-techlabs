@@ -3,20 +3,24 @@ package components;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.Map;
+
 import parser.EmployeeDTO;
 
 public class OrganisationBuilder {
-	HashSet<Employee> employeeList = new HashSet<Employee>();
-	HashSet<EmployeeDTOModel> employeeListInString = new HashSet<EmployeeDTOModel>();
-	HashSet<Employee> employeeHierarchyList = new HashSet<Employee>();
-	EmployeeDTO empDTO;
+	private HashSet<Employee> employeeList = new HashSet<Employee>();
+	private HashSet<EmployeeDTOModel> employeeListInString = new HashSet<EmployeeDTOModel>();
+	private EmployeeDTO empDTO;
+	private Map<Integer, Employee> employeeMap = new LinkedHashMap<Integer, Employee>();
+	private Employee CEO;
 
 	public OrganisationBuilder(EmployeeDTO empDTO) throws IOException {
 		this.empDTO = empDTO;
-		employeeList = loadEmployeeList();
+		employeeList = buildEmployeeList();
+		CEO();
 	}
 
-	public HashSet<Employee> loadEmployeeList() throws IOException {
+	public HashSet<Employee> buildEmployeeList() throws IOException {
 		employeeListInString = empDTO.getListOfEmployeeInStringFormat();
 		for (EmployeeDTOModel employee : employeeListInString) {
 			if (employee.getManagerId().equals("NULL")) {
@@ -36,86 +40,34 @@ public class OrganisationBuilder {
 		return employeeList;
 	}
 
-	public void hierarchyClassification() {
-		HashSet<Employee> employeeListCopy = employeeList;
-
-		for (Employee employee : employeeListCopy) {
+	public Employee hierarchyClassification() throws IOException {
+		for (Employee employee : employeeList) {
 			if (employee.getManagerId() == 0) {
-				employeeHierarchyList.add(employee);
-				//addRepotees(employee);
-
-				for (Employee employee1 : employeeListCopy) {
-					if (employee.getId() == employee1.getManagerId()) {
-						employeeHierarchyList.add(employee1);
-
-						// for (Employee employee2 : employeeListCopy) {
-						// if (employee1.getId() == employee2.getManagerId()) {
-						// employeeHierarchyList.add(employee2);
-						// }
-						// }
-					}
-				}
+				employeeMap.put(employee.getId(), employee);
+				break;
+			}
+		}
+		for (Employee employee : employeeList) {
+			if (employee.getManagerId() != 0) {
+				employeeMap.put(employee.getId(), employee);
 			}
 		}
 
-		for (Employee employee : employeeHierarchyList) {
-			System.out.println(employee);
-		}
-	}
-
-	//public void addRepotees(Employee employee) {
-		//for (Employee employee1 : employeeList) {
-			//if (employee.getId() == employee1.getManagerId()) {
-				//employeeHierarchyList.add(employee1);
-				//addRepotees(employee1);
-			//}
-		//}
-	//}
-
-	public void display() throws IOException {
-		for (Employee employee : employeeList) {
-			System.out.println(employee);
-		}
-	}
-
-	public Employee getSalary() throws IOException {
-		double temp = 0;
-		Employee employeeWithMaxSalary = null;
-		for (Employee employee : employeeList) {
-			if (employee.getSalary() > temp) {
-				temp = employee.getSalary();
-				employeeWithMaxSalary = employee;
+		for (Employee emp : employeeList) {
+			if (employeeMap.containsKey(emp.getManagerId())) {
+				employeeMap.get(emp.getManagerId()).addReportee(emp);
 			}
 		}
-		return employeeWithMaxSalary;
+
+		return employeeMap.entrySet().iterator().next().getValue();
 	}
-
-	public void getDeptWiseNumberOfEmployee() {
-
-		LinkedHashMap<Integer, Integer> employeeWithId = new LinkedHashMap<Integer, Integer>();
-		for (Employee employee : employeeList) {
-			if (!employeeWithId.containsKey(employee.getDeptId())) {
-				int count = 1;
-				employeeWithId.put(employee.getDeptId(), count);
-			} else
-				employeeWithId.put(employee.getDeptId(),
-						employeeWithId.get(employee.getDeptId()) + 1);
-		}
-		System.out.println(employeeWithId);
+	
+	public void CEO(){
+		CEO=employeeMap.get(7839);
 	}
-
-	public void getRolesWiseNumberOfEmployee() {
-
-		LinkedHashMap<String, Integer> employeeWithRole = new LinkedHashMap<String, Integer>();
-		for (Employee employee : employeeList) {
-			if (!employeeWithRole.containsKey(employee.getRole())) {
-				int count = 1;
-				employeeWithRole.put(employee.getRole(), count);
-			} else
-				employeeWithRole.put(employee.getRole(),
-						employeeWithRole.get(employee.getRole()) + 1);
-		}
-		System.out.println(employeeWithRole);
+	
+	public Employee getCEO(){
+		return CEO;
 	}
 
 }

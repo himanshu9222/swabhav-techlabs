@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <script>
+        var balance= 500;
+        function fnDeposit(amt,fn){
+            console.log(balance=balance+amt + "doing deposit with "+balance);
+            fn(balance);
+        }
+        
+        fnDeposit(100, function(creditbalance){
+            console.log("Amount is "+creditbalance);
+        });
+
+        fnDeposit(200, emailNotification);
+
+        function emailNotification(currentbalance){
+            console.log("amount is "+currentbalance);
+        }
+
+        </script>
+        <script>
+            setTimeout( function(){
+                console.log("inside settimeout");
+            },3000);
+            console.log("outside set timeout");
+        </script>
+</body>
+</html>
