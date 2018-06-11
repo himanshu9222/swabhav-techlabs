@@ -1,0 +1,174 @@
+<html>
+
+<head>
+    <style>
+    </style>
+
+</head>
+
+<body>
+
+    <div id="headingArea">
+        <center>
+            <h1>
+                QuestionGame
+            </h1>
+        </center>
+    </div>
+    <div id="questionArea"></div>
+    <div id="resultArea"></div>
+    <button id="button">Submit</button>
+    <div id="result"></div>
+    <script>      
+        var questions;
+        var totalQuestion = 5;
+        var correctAnswer = 0;
+        var data, k = 1, j;
+        var array=[];
+        var score=0;
+        getRandom(0,10);
+        document.getElementById("button").addEventListener("click",checkScore);
+
+        generateQuestion();
+        displayQuestion();
+        function displayQuestion() {
+            var question = document.getElementById("questionArea");
+            question.innerHTML = "";
+            for (var i = 0; i < totalQuestion; i++) {
+                var p= array[i];
+                question.innerHTML += "<div><label>"+(i+1)+"</label><label>"+data[p].question+"</label><br>"
+                +"<input type='radio' name='"+p+"' value='"+data[p].answers.a+"'>"+data[p].answers.a+
+                "<input type='radio' name='"+p+"' value='"+data[p].answers.b+"'>"+data[p].answers.b+
+                "<input type='radio' name='"+p+"' value='"+data[p].answers.c+"'>"+data[p].answers.c+"<br><br></div>";              
+            }
+
+        }
+
+        function getRandom(start, end){
+                var random = Math.round((Math.random() * 100000)%(end-1));
+                if(array.length != end){
+                    var exist = 0;
+                    for(var i in array){
+                        if(array[i] == random){
+                            exist=1;
+                        }
+                    }
+                    if(exist == 0){
+                        array.push(random);
+                    }
+                    getRandom(0, end);
+                }
+        }
+
+        function checkScore(){
+            for(var i=0;i<5;i++){
+                var randomData=array[i];
+                var options = document.getElementsByName(randomData);
+                var answer;
+                
+                for(var j=0;j<3;j++){
+                    console.log(options[j].checked);
+                    if(options[j].checked){
+                        answer=options[j].value;
+                        console.log(answer);
+                    }
+                }
+                if(answer==data[randomData].correctAnswer){
+                    
+                        score+=1;
+                        console.log(score);
+                    }
+            }
+            document.getElementById("result").innerHTML="Score is "+score+"/5";
+            score=0;
+        }
+
+        function generateQuestion() {
+            data = [{
+                id: 1,
+                question: "What is Javascript?",
+                answers: { a: "An ancient language", b: "A programming language", c: "A medieval manuscript"},
+                correctAnswer: "An ancient language"
+            }, {
+                id: 2,
+                question: "Where is Venice?",
+                answers: { a: "Peru", b: "Greece", c: "Italy"},
+                correctAnswer: "Italy"
+            }, {
+                id: 3,
+                question: "What does RGB mean?",
+                answers: { a: "Red, Green, Blue", b: "Real Graphics Body", c: "SWAG" },
+                correctAnswer: "Red, Green, Blue"
+            }, {
+                id: 4,
+                question: "How many strings has a  guitar?",
+                answers: { a: "3", b: " 4",c: "6" },
+                correctAnswer: "6"
+            }, {
+                id: 5,
+                question: "Who is the strongest?",
+                answers: {
+                    a: "Superman",
+                    b: "The Terminator",
+                    c: "Waluigi, obviously"
+                },
+                correctAnswer: "Superman"
+            },
+            {
+                id: 6,
+                question: "What is the best site ever created?",
+                answers: {
+                    a: "SitePoint",
+                    b: "Simple Steps Code",
+                    c: "Trick question; they're both the best"
+                },
+                correctAnswer: "Trick question; they're both the best"
+            },
+            {
+                id: 7,
+                question: "Where is Waldo really?",
+                answers: {
+                    a: "Antarctica",
+                    b: "Exploring the Pacific Ocean",
+                    c: "Minding his own business, so stop asking"
+                },
+                correctAnswer: "Antarctica"
+            },
+            {
+                id: 8,
+                question: "What is my name?",
+                answers: {
+                    a: "himanshu",
+                    b: "pratik",
+                    c: "vipul"
+                },
+                correctAnswer: "himanshu"
+            },
+            {
+                id: 9,
+                question: "where do i stay?",
+                answers: {
+                    a: "Nallasopara",
+                    b: "vasai",
+                    c: "Virar"
+                },
+                correctAnswer: "Nallasopara"
+            },
+            {
+                id: 10,
+                question: "How do you travel?",
+                answers: {
+                    a: "bike",
+                    b: "car",
+                    c: "train"
+                },
+                correctAnswer: "bike"
+            }];
+        }
+
+
+
+    </script>
+</body>
+
+</html>

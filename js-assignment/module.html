@@ -1,0 +1,89 @@
+<html>
+<head></head>
+<body>
+    <script>
+        var makeCalculator = function(){
+            var obj={};
+            var company="Swabhav techlabs";
+            var developerName="Himanshu";
+            obj.cubeEvenNo= function(no){
+                if(no%2==0){
+                    return no*no*no;
+                }
+                throw "Not-Even"
+            }
+
+            obj.getCompany=function(){
+                return company;
+            }
+
+            obj.getDeveloperName = function(){
+                return developerName;
+            }
+            return obj;
+        }
+
+        var c= makeCalculator();
+        console.log(c);
+        console.log(c.getCompany);
+        console.log(c.getDeveloperName);
+        console.log(c.cubeEvenNo(7));
+
+    </script>
+
+   <script>
+        var makeStudentstudent = function(){
+            var student={};
+            
+            var name,rollNo;
+            student.setName= function(studentName){
+                student.name=studentName;
+            }
+
+            student.setRollNo=function(studentRollNo){
+                if(studentRollNo>0)
+                student.rollNo=studentRollNo;
+            
+            }
+
+            student.getName=function(){
+                return name;
+            }
+
+            student.getRollNo = function(){
+                return rollNo;
+            }
+            console.log(student);
+
+            return student;
+        }
+    var c=makeStudentstudent();
+    console.log(c);
+    c.setName("Himanshu");
+    c.setRollNo(5);
+    </script>
+
+    <script>
+        function Employee(rollNo,name){
+            var _rollNo,_name;
+            if(rollNo>0 ){
+                _rollNo=rollNo;
+                _name=name;
+            }
+            else
+                throw "Incomple Infomation";
+            
+            this.getName= function(){
+                    return _name;
+            }
+            this.getRollNo=function(){
+                    return _rollNo;
+            }
+        }
+
+        var s1= new Employee(101,"abc");
+        console.log(s1.getName);
+        console.log(s1.getRollNo);
+    </script>
+</body>
+</html>

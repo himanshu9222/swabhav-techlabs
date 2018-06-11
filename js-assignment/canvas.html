@@ -1,0 +1,32 @@
+<html>
+    <head></head>
+    <body>
+    
+        <canvas  id="canvas" align="center" width="200" height="200" ></canvas>
+        <script>
+            (function(){
+                var canvas = document.getElementById("canvas");
+                var canvasDisplay = canvas.getContext("2d");
+                var lastend = 0;
+                var data = [60, 240]; 
+                var myTotal = 0; 
+                var myColor = ['blue', 'red']; 
+
+                for (var e = 0; e < data.length; e++) {
+                myTotal += data[e];
+                }
+
+                for (var i = 0; i < data.length; i++) {
+                    canvasDisplay.fillStyle = myColor[i];
+                    canvasDisplay.beginPath();
+                    canvasDisplay.moveTo(canvas.width / 2, canvas.height / 2);
+                    // Arc Parameters: x, y, radius, startingAngle (radians), endingAngle (radians), antiClockwise (boolean)
+                    canvasDisplay.arc(canvas.width / 2, canvas.height / 2, canvas.height / 2, lastend, lastend + (Math.PI * 2 * (data[i] / myTotal)), true);
+                    canvasDisplay.lineTo(canvas.width / 2, canvas.height / 2);
+                    canvasDisplay.fill();
+                    lastend += Math.PI * 2 * (data[i] / myTotal);
+                }
+            })();
+        </script>
+    </body>
+</html>

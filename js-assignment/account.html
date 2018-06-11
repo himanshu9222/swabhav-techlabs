@@ -1,0 +1,42 @@
+<html>
+<head></head>
+<body>
+    <script>
+        function Account(acctNo, name){
+           
+            var _acctNo, _name , _minBalance=500, _balance=0;
+            if(acctNo>0){
+                _acctNo=acctNo;
+                _name=name;
+            }
+            
+            this.deposit = function(amt){
+                _balance+=amt;
+            }
+
+            this.withdraw = function(){
+                if(_balance<500){
+                    throw "Balance Low";
+                }
+                else
+                    return _balance;
+            }
+
+            this.toString = function(){
+                return "AccountHolder Name: "+_name+" Account No: "+_acctNo+" Balalance: "+_balance;
+            }
+        }
+
+        var person1= new Account(101,"Himanshu");
+        var person2= new Account(102,"Anshu");
+        person1.deposit(10000);
+        console.log(person1.toString());
+        person2.deposit(200);
+        console.log(person2.toString());
+        person2.withdraw();
+        
+
+
+    </script>
+    </body>
+</html>

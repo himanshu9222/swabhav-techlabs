@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>New Tab App</title>
+</head>
+
+<body>
+  <form>
+    <input id="item" type="text" placeholder="New" required>
+  </form>
+  
+  <h2>Items</h2>
+  <ul></ul>
+  
+  <button id="button">Clear All</button>
+
+        <script>
+            var form = document.querySelector('form');
+            var ul = document.querySelector('ul');
+            var button = document.querySelector('button');
+            var input = document.getElementById('item');
+            var itemsArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
+
+            localStorage.setItem('items', JSON.stringify(itemsArray));
+            var data = JSON.parse(localStorage.getItem('items'));
+
+            function liMaker(text){
+                var li = document.createElement('li');
+                li.textContent = text;
+                ul.appendChild(li);
+            }
+
+            form.addEventListener('submit', function (e) {
+                    e.preventDefault();//prevent the form from the default submit action, 
+                                        //since we’re not sending any data to a server.
+
+                    itemsArray.push(input.value);
+                    localStorage.setItem('items', JSON.stringify(itemsArray));
+                    liMaker(input.value);
+                    input.value = "";
+            });
+
+            //loads data every time we refresh or open new tab
+            data.forEach(item => {
+                    liMaker(item);
+            });
+
+            button.addEventListener('click', function () {
+                    localStorage.clear();
+                    while (ul.firstChild) {
+                        ul.removeChild(ul.firstChild);
+                    }
+            });
+            
+        </script>
+</body>
+
+</html>
