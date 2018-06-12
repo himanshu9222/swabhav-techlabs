@@ -4,7 +4,7 @@ import components.enums.Mark;
 import components.exception.OutOfBoardException;
 
 public class ThreeDBoard implements IBoard{
-	private Cell[][] cell = new Cell[3][3];
+	Cell[][] cell = new Cell[3][3];
 
 	public ThreeDBoard() {
 		for (int i = 0; i < 3; i++) {
@@ -12,6 +12,10 @@ public class ThreeDBoard implements IBoard{
 				cell[i][j] = new Cell();
 			}
 		}
+	}
+	
+	public void removeAllCell(){
+		this.cell=new Cell[3][3];
 	}
 
 	@Override

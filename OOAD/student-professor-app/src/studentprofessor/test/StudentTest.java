@@ -1,22 +1,18 @@
 package studentprofessor.test;
 
 import static org.junit.Assert.*;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.Calendar;
-
 import org.junit.Test;
-
 import studentprofessor.components.EBranch;
-import studentprofessor.components.Person;
 import studentprofessor.components.Student;
 
 public class StudentTest {
 	Student student;
 	EBranch branch;
 
+	@SuppressWarnings("static-access")
 	@Test
 	public void testGetterOfStudent() throws Exception {
 
@@ -36,6 +32,7 @@ public class StudentTest {
 		System.out.println(age);
 	}
 
+	@SuppressWarnings("static-access")
 	@Test
 	public void testSetterOfStudent() throws ParseException {
 		student = new Student("", "",

@@ -24,6 +24,7 @@ public class ProfessorTest {
 		
 		Calendar dob=Calendar.getInstance();
 		dob.setTime(new SimpleDateFormat("yyyy/MM/dd").parse("1996/02/23"));
+		@SuppressWarnings("static-access")
 		int age= professor.getAge(dob);
 		int expectedage=22;
 		

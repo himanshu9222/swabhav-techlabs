@@ -18,6 +18,7 @@ public class CollegeDataStoreTest {
 	EBranch branch;
 	CollegeDataStore cds = new CollegeDataStore();
 
+	@SuppressWarnings("static-access")
 	@Test
 	public void testAddStudent() throws ParseException {
 		int beforeAdding, afterAdding;
