@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist//css/bootstrap.css">
+    <script src="jquery.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>Accordion Example</h2>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Java</a>
+                    </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                    <div class="panel-body">Java is a general-purpose computer-programming language that is concurrent, class-based, object-oriented,
+                        and specifically designed to have as few implementation dependencies as possible.</div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">C Programming</a>
+                    </h4>
+                </div>
+                <div id="collapse2" class="panel-collapse collapse">
+                    <div class="panel-body">C is a general-purpose, imperative computer programming language, supporting structured programming,
+                        lexical variable scope and recursion, while a static type system prevents many unintended operations.</div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">C++ Programming</a>
+                    </h4>
+                </div>
+                <div id="collapse3" class="panel-collapse collapse">
+                    <div class="panel-body">C++ is a general-purpose programming language. It has imperative, object-oriented and generic programming
+                        features, while also providing facilities for low-level memory manipulation.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

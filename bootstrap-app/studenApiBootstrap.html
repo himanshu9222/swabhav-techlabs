@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<title> JQuery- APP</title>
+
+<head>
+
+    <link rel="stylesheet" href="apifile.css">
+    <script src="jquery.js"></script>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.css">
+    
+    </script>
+    <script>
+        getData();
+        var url = "http://gsmktg.azurewebsites.net:80/api/v1/techlabs/test/students/";
+        function getData() {
+            $(document).ready(function () {
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    beforeSend: function () {
+
+                    },
+                    success: function (result) {
+                        $("#div1").html(result);
+                        document.getElementById("display").innerHTML = "<tr><td>RollNo</td><td>Name</td><td>Age</td><td>Email</td><td>Date</td><td>IsMale</td><td>Edit</td><td>Delete</td></tr>";
+                        makeTable(result);
+                    },
+                    error: function (xhr, status, errormsg) {
+
+                    },
+                    complete: function () {
+                        stopSpin();
+                    }
+
+                });
+
+            });
+            function makeTable(result) {
+                var len = result.length;
+                //console.log(len);
+                for (var i = 0; i < len; i++) {
+                    document.getElementById("display").innerHTML += 
+                                        "<tr><td>" + result[i].rollNo + "</td>"+
+                                        "<td>" + result[i].name + "</td>"+
+                                        "<td>"+ result[i].age + "</td>"+
+                                        "<td>" + result[i].email + "</td>"+
+                                        "<td>"+ result[i].date + "</td>"+
+                                        "<td>" + result[i].isMale+ "</td>"+
+                "<td><button  class='btn btn-default glyphicon glyphicon-wrench edit' value="+result[i].rollNo+"></button></td>"+
+                "<td><button id='detetebtn' class='glyphicon glyphicon-trash' value="+result[i].rollNo+"></button></td></tr>";
+                }
+            }
+        }
+
+        $(document).on("click",".edit",function(){
+            $(this).prop("disabled",true);
+            $("#submit").html("Edit Student").prop("id","editStudent");
+        });
+
+        $(document).on("click","#editStudent",function(){
+            var id=$(this).val()
+            console.log($(this).val());
+            if(validateForm()){
+                    var student= makeStudent();
+                    $.ajax({
+                        method:"PUT",
+                        url: url+student.rollNo,
+                        data: student,
+                        beforeSend: function(){
+
+                        },
+                        success:function(student){
+                        },
+                        function (xhr, status, errormsg) {
+
+                        },
+                        complete: function () {
+                            $("#editStudent").html("Submit").prop("id","submit");
+                            $(".edit").prop("disabled",false);
+                            getData();
+                        }
+                    });
+            }
+        });
+        
+        
+        $(document).on("click",".glyphicon.glyphicon-trash",function(){
+                var btnvalue= $(this);
+                console.log(btnvalue.val());
+                $.ajax({
+                    url: url+btnvalue.val(),
+                    method: "delete",
+                    beforeSend: function(){
+
+                    },
+                    success:function(){
+                        console.log("deleted");
+                        getData();
+                    },
+                    function (xhr, status, errormsg) {
+
+                    },
+                    complete: function () {
+
+                    }
+                });
+        });
+
+            $(document).on("click","#submit", function () {
+                startSpin();
+                $("#submit").prop("disabled", true);
+                console.log(validateForm());
+
+                var student=makeStudent();
+                if (validateForm()) {
+                    $.post(url,
+                        student,
+                    );
+                    if (true) {
+                        getData();
+                        console.log("added");
+                    }
+                    $("#submit").prop("disabled", false);
+                }
+            });
+
+        function validateForm() {
+            var isValid = true;
+            $('.form-control').each(function () {
+                if ($(this).val() === '') {
+                    isValid = false;
+                    $(this).css("background-color", "#BC7D7D");
+                }
+            });
+            return isValid;
+        }
+
+        function makeStudent(){
+            var student={};
+            
+            student.rollNo= $("#rollno").val();
+            student.name= $("#name").val();
+            student.age=$("#age").val();
+            student.email=$("#email").val();
+            student.date=$("#dateString").val();
+            student.isMale=$("#ismale").val();
+
+            return student;
+        }
+
+        function startSpin() {
+            $(".loader").css("display", "block");
+        }
+
+        function stopSpin() {
+            $(".loader").css("display", "none");
+        }
+    </script>
+</head>
+
+<body>
+
+    <table class="table table-striped">
+        <tbody id="display">
+            <tr>
+                <th>RollNO</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>IsMale</th>
+            </tr>
+        </tbody>
+    </table>
+
+    <label>
+    </label>
+    <form >
+    <div class="form-inline">
+        <div class="form-group">
+        <br> RollNo:
+        <input type="text" id="rollno" class="form-control" required>
+        </div>
+        <div class="form-group">
+        <br> Name:
+        <input type="text" id="name" class="form-control"required>
+        </div>
+        <div class="form-group">
+        <br> Age:
+        <input type="text" id="age"class="form-control" required>
+        </div></div>
+    <div class="form-inline">
+        <div class="form-group">
+        <br> Email:
+        <input type="text" id="email"class="form-control" required>
+        </div>
+        <div class="form-group">
+        <br> Date:
+        <input type="date" id="dateString"class="form-control" required>
+        </div>
+        <div class="checkbox-inline">
+        <br> IsMale:
+        <input type="radio" id="ismale" value="true" class="form-control" name="gender">Male
+        <input type="radio" id="ismale" value="false" class="form-control" name="gender">Female
+        </div>
+        <br><br><br>
+        <div id="loadCircle" class="loader" style="display:none;"></div> &nbsp&nbsp
+        <button id="submit" class="btn btn-primary ">Submit</button>
+        <br>
+        <br>
+    </div></div></form>
+
+</body>
+
+</html>

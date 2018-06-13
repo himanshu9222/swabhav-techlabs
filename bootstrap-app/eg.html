@@ -1,0 +1,34 @@
+$(document).on("click",".glyphicon.glyphicon-wrench",function(){
+    var upval=$(this);
+    console.log(upval.val());
+    $.ajax({
+        url : url+"/"+upval.val(),
+        mrthod: "GET",
+        dataType: "JSON",
+        beforeSend: function(){
+
+        },
+        
+        success:function(student){
+            var isMale1="false";
+            console.log(student.rollNo+" "+student.name+" "+student.age+" "+student.email+" "+student.date+" "+student.isMale);
+            var r=student.rollNo;
+            rollNo1.val(student.rollNo);
+            rollNo1.attr("disabled","disabled");
+            name1.val(student.name);
+            age1.val(student.age);
+            email1.val(student.email);
+            date1.val(student.date);
+            if(student.isMale)
+                isMale1="true";
+            console.log(rollNo1+" "+name1+" "+age1+" "+email1+" "+date1+" "+isMale1);
+            getData();
+        },
+        function (xhr, status, errormsg) {
+
+        },
+        complete: function () {
+
+        }
+    });
+});

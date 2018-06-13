@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<title> JQuery- APP</title>
+
+<head>
+
+    <link rel="stylesheet" href="apifile.css">
+
+    <script src="jquery.js">
+    </script>
+    <script>
+        getData();
+        var url = "http://gsmktg.azurewebsites.net:80/api/v1/techlabs/test/students";
+        function getData() {
+            $(document).ready(function () {
+                $.ajax({
+                    url: url,
+                    type: "GET",
+                    beforeSend: function () {
+
+                    },
+                    success: function (result) {
+                        $("#div1").html(result);
+                        document.getElementById("display").innerHTML = "<tr><td>RollNo</td><td>Name</td><td>Age</td><td>Email</td><td>Date</td><td>IsMale</td></tr>";
+                        makeTable(result);
+                    },
+                    error: function (xhr, status, errormsg) {
+
+                    },
+                    complete: function () {
+                        stopSpin();
+                    }
+
+                });
+
+            });
+            function makeTable(result) {
+                var len = result.length;
+                //console.log(len);
+                for (var i = 0; i < len; i++) {
+                    document.getElementById("display").innerHTML += "<tr><td>" + result[i].rollNo + "</td><td>" + result[i].name + "</td><td>"
+                        + result[i].age + "</td><td>" + result[i].email + "</td><td>" + result[i].date + "</td><td>" + result[i].isMale + "</td></tr>";
+                }
+            }
+        }
+
+        var name1, rollNo1, age1, email1, date1, isMale1;
+        $(document).ready(function () {
+            $("#submit").on("click", function () {
+                startSpin();
+                $("#submit").prop("disabled", true);
+                console.log(validateForm());
+
+                rollNo1 = $("#rollno").val();
+                name1 = $("#name").val();
+                age1 = $("#age").val();
+                email1 = $("#email").val();
+                date1 = $("#dateString").val();
+                isMale1 = $("#ismale").val();
+
+                console.log("{rollNO= " + rollNo1 + " Name= " + name1 + " age = "
+                    + age1 + " email= " + email1 + " date= " + date1 + " Male= " + isMale1);
+
+                if (validateForm()) {
+                    $.post(url,
+                        {
+                            rollNo: rollNo1, name: name1, age: age1,
+                            email: email1, date: date1, isMale: isMale1
+                        },
+                    );
+                    if (true) {
+                        getData();
+                    }
+                    $("#submit").prop("disabled", false);
+                }
+            });
+        });
+
+        function validateForm() {
+            var isValid = true;
+            $('.inp').each(function () {
+                if ($(this).val() === '') {
+                    isValid = false;
+                    $(this).css("background-color", "#BC7D7D");
+                }
+            });
+            return isValid;
+        }
+
+        function startSpin() {
+            $(".loader").css("display", "block");
+        }
+
+        function stopSpin() {
+            $(".loader").css("display", "none");
+        }
+    </script>
+</head>
+
+<body>
+
+    <table>
+        <tbody id="display">
+            <tr>
+                <th>RollNO</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>IsMale</th>
+            </tr>
+        </tbody>
+    </table>
+
+    <label>
+    </label>
+    <div>
+        RollNo:
+        <input type="text" id="rollno" class="inp" required>
+        <br>
+        <br> Name:
+        <input type="text" id="name" class="inp" required>
+        <br>
+        <br> Age:
+        <input type="text" id="age" class="inp" required>
+        <br>
+        <br> Email:
+        <input type="text" id="email" class="inp" required>
+        <br>
+        <br> Date:
+        <input type="date" id="dateString" class="inp" required>
+        <br>
+        <br> IsMale:
+        <input type="radio" id="ismale" value="true" class="inp" name="gender">Male
+        <input type="radio" id="ismale" value="false" class="inp" name="gender">Female
+        <br>
+        <br>
+        <div id="loadCircle" class="loader" style="display:none;"></div> &nbsp&nbsp
+        <button id="submit">Submit</button>
+        <br>
+        <br>
+    </div>
+
+</body>
+
+</html>
