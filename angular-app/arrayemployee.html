@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<body ng-app="myApp">
+    <div ng-controller="myCtrl" class="container">
+        <table  class="table">
+            <tr>
+                <td><strong>ID</strong></td>
+                <td><strong>Name</strong></td>
+                <td><strong>Company</strong></td>
+                <td><strong>Developer</strong></td>
+            </tr>
+            <tr ng-repeat="x in records">
+                <td>{{x.id}}</td>
+                <td>{{x.name}}</td>
+                <td>{{x.company}}</td>
+                <td>{{x.role}}</td>
+
+            </tr>
+        </table>
+        <div style="float:left;margin:30px;">
+            <form class="form-horizontal">
+                Id:
+                <input type="number" ng-model="idInput" placeholder="Enter the Id" class="form-control" />
+                <br> Name:
+                <input type="text" ng-model="nameInput" placeholder="Enter Name" class="form-control" />
+                <br> Company:
+                <input type="text" ng-model="companyInput" placeholder="Enter Company Name" class="form-control" />
+                <br> Role:
+                <input type="text" ng-model="roleInput" placeholder="Enter Role" class="form-control" />
+                <br>
+
+                <p>
+                    <button ng-click="add(idInput,nameInput,companyInput,roleInput)">Add Employee</button>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", function ($scope) {
+            $scope.records = [
+                {
+                    "id": 101,
+                    "name": "Himanshu",
+                    "company": "AurionPro",
+                    "role": "Developer"
+                },
+                {
+                    "id": 102,
+                    "name": "Pratik",
+                    "company": "AurionPro",
+                    "role": "Developer"
+                },
+                {
+                    "id": 103,
+                    "name": "Vipul",
+                    "company": "AurionPro",
+                    "role": "Developer"
+                },
+                {
+                    "id": 104,
+                    "name": "Santosh",
+                    "company": "Fitfilia",
+                    "role": "Developer"
+                }
+            ]
+
+            $scope.add = function (id, name, company, role) {
+                //console.log("Inside");
+                if (valid()) {
+                    $scope.records.push({
+                        "id": id,
+                        "name": name,
+                        "company": company,
+                        "role": role
+                    });
+
+                    $scope.idInput = "";
+                    $scope.nameInput = "";
+                    $scope.companyInput = "";
+                    $scope.roleInput = "";
+
+                }
+
+                function valid() {
+                    if (angular.isDefined(id) && id != '' && angular.isDefined(name) && name != '' &&
+                        angular.isDefined(company) && company != '' &&
+                        angular.isDefined(role) && role != '') {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+
+        });
+    </script>
+
+</body>
+
+</html>

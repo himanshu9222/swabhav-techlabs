@@ -1,0 +1,26 @@
+<html>
+<head>
+        <script src="angular.js"></script>  
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+        <script >
+            angular.module('moduleA',[]).controller("eventCtr",function($rootScope,$scope){
+               $scope.myFunc=function(){
+                   $scope.employee={
+                       name: "Himanshu",
+                       image: "pic_trulli.jpg"
+                   }
+               };
+
+            });
+        </script>      
+        
+</head>
+<body ng-app="moduleA">
+    <section ng-controller="eventCtr" >
+        <button ng-click="myFunc()">Load</button>
+        <h2>Name   : {{employee.name}}</h2>
+        <h2>Profile: <img ng-src="{{employee.image}}" ></img></h2>
+    </section>
+    
+</body>
+</html>

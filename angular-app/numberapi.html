@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<script src="angular.js"></script>
+<script>
+    angular.module('numberApi', []).controller("numberApiCtr", function ($http, $scope) {
+        $scope.url = "http://numbersapi.com/";
+        $scope.search = function () {
+            console.log($scope.numberInput);
+            $http.get($scope.url + $scope.numberInput).then(function (r) {
+                $scope.result = r.data;
+                console.log(r);
+            });
+        };
+
+    });
+</script>
+
+<body ng-app="numberApi">
+    <form class="form-inline" ng-controller="numberApiCtr">
+        Name:
+        <input type="number" ng-model="numberInput" placeholder="Enter the Number" class="form-control" />
+        <button ng-click="search()">Search</button>
+        <p>{{result}}</p>
+    </form>
+</body>
+
+</html>

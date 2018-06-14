@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+        <script src="angular.js"></script>
+        <script>
+            angular.module('moduleA',[]).controller("eventCtr",function($rootScope,$scope){
+                   
+                       $scope.id= 101;
+                       $scope.name= "Himanshu";
+                       $scope.role= "developer";
+            });
+        </script>
+
+<body ng-app="moduleA">
+
+        <section ng-controller="eventCtr">
+                <P>One time binding</P> binding</P>
+            <h2 >Id   : {{id}}</h2>
+            <h2 >Name: {{name}}</h2>
+            <h2 >Date   : {{role}}</h2><br><br>
+        </section>
+
+        <section ng-controller="eventCtr">
+            <P>One way binding</P>
+            <h2 >Id   : {{id}}</h2>
+            <h2 >Name: {{name}}</h2>
+            <h2 >Date   : {{role}}</h2><br><br></br1>
+
+
+            <p>Two way binding</p>
+            <p>Id: <input type="number" ng-model="id"></p>
+            <p>Name: <input type="text" ng-model="name"></p>
+            <p>Date: <input type="text" ng-model="role"></p>
+        </section>
+
+</body>
+</html>

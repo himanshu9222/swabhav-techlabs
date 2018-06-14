@@ -1,0 +1,26 @@
+<html>
+<head>
+        <script src="angular.js"></script>  
+        <script >
+            angular.module('moduleA',[]).controller("employeeCtr",function($rootScope,$scope,$timeout){
+                $scope.employee={
+                    name: "Himanshu",
+                    company: "SwabhavTech",
+                    date: "12/02/2018",
+                    salary: 20000
+                };
+                $timeout( function(){ $scope.employee.company="AurionPro"; }, 2000);
+            });
+        </script>      
+        
+</head>
+<body ng-app="moduleA">
+    <section ng-controller="employeeCtr">
+        <h2>Name   : {{employee.name}}</h2>
+        <h2>Company: {{employee.company}}</h2>
+        <h2>Date   : {{employee.date}}</h2>
+        <h2>Salary : {{employee.salary}}</h2>
+    </section>
+    
+</body>
+</html>

@@ -61,6 +61,7 @@
             console.log($(this).val());
             if(validateForm()){
                     var student= makeStudent();
+                    //fillForm(student);
                     $.ajax({
                         method:"PUT",
                         url: url+student.rollNo,
@@ -81,6 +82,18 @@
                     });
             }
         });
+
+        function fillForm(student){
+
+            $("#rollno").val(student.rollNo);
+            $("#name").val(student.name);
+            $("#age").val(student.age);
+            $("#email").val(student.email);
+            $("#dateString").val(student.date);
+            $("#ismale").prop("checkbox",false);
+            if(student.isMale)
+                $("#ismale").prop("checkbox",true);
+        }
         
         
         $(document).on("click",".glyphicon.glyphicon-trash",function(){

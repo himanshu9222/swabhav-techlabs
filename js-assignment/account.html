@@ -14,12 +14,12 @@
                 _balance+=amt;
             }
 
-            this.withdraw = function(){
-                if(_balance<500){
-                    throw "Balance Low";
+            this.withdraw = function(amt){
+                if(_balance-amt>500){
+                    return _balance-=amt;
                 }
                 else
-                    return _balance;
+                    throw "insufficient fund";
             }
 
             this.toString = function(){
@@ -33,7 +33,7 @@
         console.log(person1.toString());
         person2.deposit(200);
         console.log(person2.toString());
-        person2.withdraw();
+        person2.withdraw(200);
         
 
 

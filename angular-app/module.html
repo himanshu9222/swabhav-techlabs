@@ -1,0 +1,23 @@
+<html>
+<head>
+        <script src="angular.js"></script>        
+        <script src="module.js"></script>
+</head>
+<body ng-app="moduleA">
+    <section ng-controller="InvoiceCtr">
+        <h2>{{developer}}</h2>
+        <h2>{{invoice.cost}}</h2>
+    </section>
+
+    <section ng-controller="AddressCtr">
+            <h2>{{address.city}}</h2>
+            <h2>{{address.street}}</h2>
+    </section>
+
+    <section ng-controller="OrderCtr">
+                <h2>{{developer}}</h2>
+                <h2>{{order.bill}}</h2>
+    </section>
+    
+</body>
+</html>
