@@ -35,7 +35,7 @@
                     running = 0;
                     $("#startPause").html("Resume watch");
                 }
-
+            });
                 function increment() {
                 if (running == 1) {
                     setTimeout(function () {
@@ -49,13 +49,12 @@
                     }, 100);
                 }
             }
-            });
-
+            
             $(document).on("click","#reset",function(){
                 running = 0;
                 time = 0;
-                document.getElementById("startPause").innerHTML = "Start watch";
-                document.getElementById("output").innerHTML = "00:00:00";
+                $("#startPause").html("Start watch");
+                $("#output").html("00:00:00");
             });
         });
     </script>
