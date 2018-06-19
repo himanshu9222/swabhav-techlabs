@@ -1,0 +1,31 @@
+<section>
+    <table class="table table-striped">
+        <tbody id="tableBody">
+            <tr>
+                <td>RollNo</td>
+                <td>Name</td>
+                <td>Age</td>
+                <td>Email</td>
+                <td>Date</td>
+                <td>Gender</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+            <tr ng-repeat="x in result">
+                <td>{{x.rollNo}}</td>
+                <td>{{x.name}}</td>
+                <td>{{x.age}}</td>
+                <td>{{x.email}}</td>
+                <td>{{x.date | date}}</td>
+                <td>{{x.isMale | gender}}</td>
+                <td>
+                    <button ng-click="goToEdit(x.rollNo)" class='btn btn-default glyphicon glyphicon-wrench edit' value="{{x.rollNo}}"></button>
+                </td>
+                <td>
+                    <button ng-click="deleteStudent(x.rollNo)" ng-controller="deleteCtrl" class='glyphicon glyphicon-trash' value="{{x.rollNo}}"></button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</section>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="student-app">
+
+<head>
+    <title>Spa APP</title>
+    <link rel="styleSheet" href="page.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.1/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.1/angular-route.js"></script>
+    <script src="controllers.js"></script>
+    <script src="dataService.js"></script>
+    <script src="loginService.js"></script>
+    <script src="genderFilter.js"></script>
+    <script src="app.js"></script>
+
+</head>
+
+<body>
+    <div class="header">
+        <strong>
+            <h1>SPA APP</h1>
+        </strong>
+    </div>
+    <div class="topnav">
+        <a href="#add">Add</a>
+        <a href="#students">Display</a>
+        <a><button class="btn btn-primary" ng-controller="logoutCtrl" ng-click="logout()" ng-show="logoutShow">Logout</button></a>
+        <a href="#login">
+            <button class="btn btn-primary" ng-show="loginShow">Login</button>
+        </a>
+        <a><label ng-show="guestShow">Guest</label></a>
+    </div>
+
+    <div ng-view>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,69 @@
+<html>
+<head>
+        <script src="angular.js"></script>  
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+        <script >
+            angular.module('moduleA',[]).controller("eventCtr",function($q,$rootScope,$scope){
+                
+            var dataService= function(){
+                var obj={};
+                obj.getData= function(){
+                    var p= new Promise(function(resultive,reject){
+                        var r= Math.floor(Math.random()*10);
+                        if(r>5){
+                            resultive(r);
+                        }
+                        else{
+                            var e= new Error("Result is unsuccesful");
+                            reject(e);
+                        }
+                    });
+                    return p;
+                }
+                return obj;
+            }();
+            //function success(r){}
+            //function reject(e){}
+            //dataService.getData().then(success(r),reject(e));
+            dataService.getData().then(function(r){
+                console.log("Inside Resultive");
+                console.log(r);
+            },function(e){
+                console.log(e);
+            }).then(function(){
+                console.log("inside 2nd promise");
+            });
+
+            /*var deferred = $q.defer();
+                var promise = deferred.promise;
+
+                promise
+                .then(function(val) {
+                    console.log(val);
+                    return 'B';
+                })
+                .then(function(val) {
+                    console.log(val);
+                    return 'C'
+                })
+                .then(function(val) {
+                    console.log(val);
+                },function(e){
+                    throw "error";
+                });
+
+                deferred.resolve('A');
+            */
+
+        });
+        </script>      
+        
+</head>
+<body ng-app="moduleA">
+    <section ng-controller="eventCtr" >
+        <h2>{{}}</h2>
+    </section>
+    
+</body>
+</html>
+

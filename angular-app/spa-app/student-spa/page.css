@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+margin: 0;
+}
+
+.header {
+    background-color: #83b8b1d5;
+    padding: 10px;
+    text-align: center;
+}
+
+.display{
+    background-color: #83b8b1d5;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #e053c9;
+}
+
+.topnav a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.column {
+    float: left;
+    padding: 10px;
+}
+
+.column.side {
+    width: 30%;
+}
+
+.column.middle {
+    width: 40%;
+}
+
+input.ng-invalid {
+    background-color:pink;
+}
+input.ng-valid {
+    background-color:lightgreen;
+}

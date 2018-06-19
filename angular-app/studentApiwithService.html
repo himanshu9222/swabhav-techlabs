@@ -1,36 +1,86 @@
 <!DOCTYPE html>
 <html>
 <script src="angular.js"></script>
-<script>
-    angular.module('studentApi', []).controller("studentApiCtr", function (dataService, $scope) {
-        $scope.url = "http://gsmktg.azurewebsites.net:80/api/v1/techlabs/test/students/";
-        $scope.search = function () {
-            console.log($scope.rollNoInput);
-            $scope.result = dataService.getData($scope.url + $scope.rollNoInput);
-
-        };
-
-    });
-
-    angular.module('studentApi').factory('dataService', function ($http) {
-        var obj = {};
-        obj.getData = function (url) {
-            return $http.get(url).then(function (r) {
-                r.data;
-                console.log(r.data);
-            });
-        }
-        return obj;
-    });
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="studentApi.js">
+    
 </script>
 
 <body ng-app="studentApi">
     <form class="form-inline" ng-controller="studentApiCtr">
-        Name:
-        <input type="number" ng-model="rollNoInput" placeholder="Enter the Number" class="form-control" />
-        <button ng-click="search()">Search</button>
-        <p>{{result}}</p>
+            <table class="table table-striped">
+                <tbody id="tableBody">
+                    <tr>
+                        <td>RollNo</td>
+                        <td>Name</td>
+                        <td>Age</td>
+                        <td>Email</td>
+                        <td>Date</td>
+                        <td>IsMale</td>
+                        <td>Edit</td>
+                        <td>Delete</td>
+                    </tr>
+                    <tr ng-repeat="x in result">
+                        <td>{{x.rollNo}}</td>
+                        <td>{{x.name}}</td>
+                        <td>{{x.age}}</td>
+                        <td>{{x.email}}</td>
+                        <td>{{x.date | date}}</td>
+                        <td>{{x.isMale}}</td>
+                        <td><button  ng-click="updateStudent(x)" class='btn btn-default glyphicon glyphicon-wrench edit' value="{{x.rollNo}}"></button></td>
+                        <td><button ng-click="deleteStudent(x.rollNo)" class='glyphicon glyphicon-trash' value="{{x.rollNo}}"></button></td>
+        
+                    </tr>
+                </tbody>
+            </table>
+
+        <div>
+
+        <div class="form-vertical col-sm-4">
+                <div class="form-group">
+                <br> RollNo:
+                <input type="number" ng-model="rollInput" class="form-control" required>
+                </div>
+                <div class="form-group">
+                <br> Name:
+                <input type="text" ng-model="nameInput" class="form-control"required>
+                </div>
+                <div class="form-group">
+                <br> Age:
+                <input type="text" ng-model="ageInput" class="form-control" required>
+                </div>
+                <div class="form-group">
+                <br> Email:
+                <input type="text" ng-model="emailInput" class="form-control" required>
+                </div>
+                <div class="form-group">
+                <br> Date:
+                <input type="date" ng-model="dateInput" class="form-control" required>
+                </div>
+                <div class="checkbox-inline">
+                <br> IsMale:
+                <input type="radio" ng-model="isMale" ng-value="true" class="form-control" name="gender">Male
+                <input type="radio" ng-model="isMale" ng-value="false" class="form-control" name="gender">Female
+                </div>
+                <br><br><br>
+                <button id="submit" class="btn btn-primary" ng-click="addStudent()">Submit</button>
+                <button id="submit" class="btn btn-primary" ng-click="update()">Update Edited</button>
+                <br>
+                <br>
+            </div>
+        </form>
+        <div>
+            <p>Input Student Id</p>
+            Name:
+            <input type="number" ng-model="rollNoInput" placeholder="Enter the Number" class="form-control" />
+            <button ng-click="search()">Search</button>
+            <p>{{currentData}}</p>
+
+        </div>
     </form>
+    
 </body>
 
 </html>
