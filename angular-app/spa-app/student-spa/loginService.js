@@ -10,15 +10,20 @@ angular.module('swabhavcontroller').service('loginService', function () {
         password: "123abc"
     }];
 
-    var user = {
+    /*var users = {
         "himanshu": "123456",
         "vipul": "abcd",
         "pratik": "123abc"
-    };
+    };*/
 
     var isAuthenticated = false;
     
-    this.login = function (username, password) {
+    this.currentUser = function(user){
+        return user;
+    }
+
+    this.login = function (username,password) {
+        console.log("Inside user");
         for (var i = 0; i < loginDetail.length; i++) {
             if(username == loginDetail[i].id && password == loginDetail[i].password){
                 localStorage.setItem("flag",true);
@@ -30,7 +35,17 @@ angular.module('swabhavcontroller').service('loginService', function () {
 });
 
 
-  /*$scope.loginFlag = false;
+  /*
+  this.login = function (user) {
+        console.log("Inside user");
+            if(users[user.id]==user.password){
+                localStorage.setItem("flag",true);
+                isAuthenticated=true;
+            };
+        return isAuthenticated;
+  
+  
+  $scope.loginFlag = false;
         $scope.checkValidation = function () {
             $scope.id = $scope.student.id;
             $scope.password = $scope.student.password;

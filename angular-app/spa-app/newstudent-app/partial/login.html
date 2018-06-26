@@ -1,0 +1,16 @@
+<div class="form-group col-sm-4" ng-form="mainForm">
+    <br><br>
+    <div class="form-group" ng-form="nameForm">
+        <label class="control-label" for="uname"><b>Username</b></label>
+        <input  class="form-control" ng-model="student.id" type="text" placeholder="Enter Username" name="uname" required>
+    </div>
+    <div class="form-group" ng-form="passwordForm">
+        <label class="control-label" for="psw"><b>Password</b></label>
+        <input  class="form-control" ng-model="student.password" type="password" placeholder="Enter Password" name="psw" required>
+    </div>   
+        <button type="submit" class="btn btn-primary" ng-click="checkValidation(student)" ng-disabled="mainForm.$pristine || mainForm.$invalid || mainForm.$error.required">Login</button>
+
+        <label>
+          <input type="checkbox" checked="checked" ng-model="remember" name="remember"> Remember me
+        </label>
+</div>

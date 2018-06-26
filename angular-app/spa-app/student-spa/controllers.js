@@ -3,23 +3,24 @@ angular.module('swabhavcontroller', [])
         $scope.result;
 
 
-        //localStorage.setItem("flag",false);
-        $scope.loginFlag = JSON.parse(localStorage.getItem("flag"));
-        $rootScope.checkLogin = function () {
+        localStorage.setItem("flag",false);
+        //$scope.loginFlag = JSON.parse(localStorage.getItem("flag"));
+       /* $rootScope.checkLogin = function () {
             if ($scope.loginFlag == false) {
                 //console.log("inside");
+                $rootScope.guestShow = false;
                 $rootScope.loginShow = true;
                 $rootScope.logoutShow = false;
-                $rootScope.guestShow = false;
             }
             if ($scope.loginFlag == true) {
                 //console.log("inside");
+                $rootScope.guestShow = true;
                 $rootScope.logoutShow = true;
                 $rootScope.loginShow = false;
-                $rootScope.guestShow = true;
+  
             }
         }
-        $rootScope.checkLogin();
+        $rootScope.checkLogin();*/
         $scope.goToEdit = function (id) {
             $location.path("/edit/" + id);
         };
@@ -113,7 +114,6 @@ angular.module('swabhavcontroller', [])
             }
         };
     }]).controller('loginCtrl', ['$rootScope', '$scope', '$location', 'loginService', function ($rootScope, $scope, $location, loginService) {
-        //console.log("Inside Login");
         $scope.checkValidation = function () {
             $scope.loginFlag = loginService.login($scope.student.id, $scope.student.password);
             if ($scope.loginFlag) {
