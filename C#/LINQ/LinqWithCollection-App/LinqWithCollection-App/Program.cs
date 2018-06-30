@@ -49,7 +49,7 @@ namespace LinqWithCollection_App
             }
             Console.WriteLine();
 
-            var displayTop2SalaryEmployee = employeeList.OrderByDescending(x => x.Salary).ToArray().Take(2);
+            var displayTop2SalaryEmployee = employeeList.OrderByDescending(x => x.Salary).Take(2).ToArray();
             foreach (var employee in displayTop2SalaryEmployee)
             {
                 Console.WriteLine(employee);
