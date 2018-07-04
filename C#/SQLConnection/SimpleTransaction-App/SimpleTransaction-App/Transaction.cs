@@ -12,9 +12,8 @@ namespace SimpleTransaction_App
     class Transaction
     {
         SqlConnection conn;
-        SqlCommand command1, command2,command3,command4;
+        SqlCommand command1, command2;
         SqlTransaction transaction;
-        SqlDataReader reader;
 
         public Transaction()
         {
@@ -26,20 +25,66 @@ namespace SimpleTransaction_App
         public void CustomerPay(int amt)
         {
             
-            //int newvalue = 0; 
+            int newvalue= amt; 
             try
             {
-                //conn.Open();
-                //command3 = new SqlCommand {CommandText = "SELECT BALANCE FROM MERCHANT WHERE NAME = 'DEALER'",Connection = conn };
-                ////command1 = new SqlCommand { CommandText = "UPDATE CUSTOMER SET BALANCE =", Connection = conn }; 
-                ////command1.Parameters.AddWithValue("@nameNewValue", newvalue);
-                ////reader = fetch.ExecuteReader();
-                //reader = command3.ExecuteReader();
-                //Console.WriteLine(reader);
-                //Console.WriteLine(int.Parse(reader.ToString()));
+                conn.Open();
+                string dealer = "DEALER";
+                string customer = "HIMANSHU";
+                command1 = new SqlCommand { CommandText = "UPDATE MERCHANT SET BALANCE = BALANCE + @mvalue WHERE NAME = @mname", Connection = conn }; 
+                command1.Parameters.AddWithValue("@mname", dealer);
+                command1.Parameters.AddWithValue("@mvalue",newvalue);
+                command2 = new SqlCommand { CommandText = "UPDATE CUSTOMER SET BALANCE = BALANCE - @cvalue WHERE NAME = @name", Connection = conn };
+                command2.Parameters.AddWithValue("@cname", customer);
+                command2.Parameters.AddWithValue("@cvalue", newvalue);
+                transaction = conn.BeginTransaction();
+                command1.Transaction = transaction;
+                command2.Transaction = transaction;
+                command1.ExecuteNonQuery();
+                command2.ExecuteNonQuery();
+                transaction.Commit();
+                Console.WriteLine("Transaction Completed");
+                Console.ReadKey();
             }
             catch (Exception ex)
             {
+                transaction.Rollback();
+                Console.WriteLine(ex.Message);
+                Console.ReadKey();
+            }
+            finally
+            {
+                Close();
+            }
+        }
+
+        public void DealerPay(int amt)
+        {
+
+            int newvalue = amt;
+            try
+            {
+                conn.Open();
+                string dealer = "DEALER";
+                string customer = "HIMANSHU";
+                command1 = new SqlCommand { CommandText = "UPDATE MERCHANT SET BALANCE = BALANCE - @mvalue WHERE NAME = @mname", Connection = conn };
+                command1.Parameters.AddWithValue("@mname", dealer);
+                command1.Parameters.AddWithValue("@mvalue", newvalue);
+                command2 = new SqlCommand { CommandText = "UPDATE CUSTOMER SET BALANCE = BALANCE + @cvalue WHERE NAME = @cname", Connection = conn };
+                command2.Parameters.AddWithValue("@cname", customer);
+                command2.Parameters.AddWithValue("@cvalue", newvalue);
+                transaction = conn.BeginTransaction();
+                command1.Transaction = transaction;
+                command2.Transaction = transaction;
+                command1.ExecuteNonQuery();
+                command2.ExecuteNonQuery();
+                transaction.Commit();
+                Console.WriteLine("Transaction Completed");
+                Console.ReadKey();
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
                 Console.WriteLine(ex.Message);
                 Console.ReadKey();
             }
