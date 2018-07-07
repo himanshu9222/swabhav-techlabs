@@ -15,9 +15,9 @@ namespace ContactMVC_App.Controllers
         // GET: Contact
         public ActionResult Home()
         {
-            if (this.HttpContext.Application["Login"] == null)
+            if (Session["Login"] == null)
             {
-                this.HttpContext.Application["Login"] = "Guest";
+                Session["Login"] = "Guest";
             }
      
             List<Contact> contactList = cs.ContactList;
@@ -31,7 +31,11 @@ namespace ContactMVC_App.Controllers
         [HttpGet]
         public ActionResult Add()
         {
-            if ((string)this.HttpContext.Application["Login"] == "Guest")
+            if (Session["Login"] == null)
+            {
+                Session["Login"] = "Guest";
+            }
+            if ((string)Session["Login"] == "Guest")
             {
                 return RedirectToAction("LoginUser", "Login");
             }
@@ -56,7 +60,11 @@ namespace ContactMVC_App.Controllers
         [HttpGet]
         public ActionResult Edit(string name)
         {
-            if ((string)this.HttpContext.Application["Login"] == "Guest")
+            if (Session["Login"] == null)
+            {
+                Session["Login"] = "Guest";
+            }
+            if ((string)Session["Login"] == "Guest")
             {
                 return RedirectToAction("LoginUser", "Login");
             }
@@ -88,7 +96,11 @@ namespace ContactMVC_App.Controllers
 
         public ActionResult Delete(string name)
         {
-            if ((string)this.HttpContext.Application["Login"] == "Guest")
+            if (Session["Login"] == null)
+            {
+                Session["Login"] = "Guest";
+            }
+            if ((string)Session["Login"] == "Guest")
             {
                 return RedirectToAction("LoginUser", "Login");
             }

@@ -28,7 +28,7 @@ namespace ContactMVC_App.Controllers
                 bool state = ls.CheckCredentials(vm);
                 if (state)
                 {
-                    this.HttpContext.Application["Login"] = vm.UserName;
+                    Session["Login"] = vm.UserName;
                 }
                 return RedirectToAction("Home","Contact");
             }

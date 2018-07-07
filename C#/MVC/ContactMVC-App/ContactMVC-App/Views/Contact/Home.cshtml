@@ -18,13 +18,13 @@
     </p>
 
     <p>    
-        @if ((string)HttpContext.Current.Application["Login"] != "Guest") {
+        @if ((string)Session["Login"] != "Guest") {
       <input type="button" value="Logout" onclick="location.href='@Url.Action("Logout", "Login")'"   class="btn btn-default" />
-      @Html.Label((string)HttpContext.Current.Application["Login"]);
+      @Html.Label((string)Session["Login"]);
         }
         else
         {
-            @Html.Label((string)HttpContext.Current.Application["Login"]);
+            @Html.Label((string)Session["Login"]);
         }
     </p>
     <table class="table">

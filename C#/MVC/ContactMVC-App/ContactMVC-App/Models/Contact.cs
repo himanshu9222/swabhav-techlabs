@@ -27,8 +27,7 @@ namespace ContactMVC_App.Models
         }
 
         [Required(ErrorMessage = "Number is Required")]
-        [RegularExpression(@"^[6-9]\d{9}$",ErrorMessage ="Wrong Number Format")]
-        //[CustomPhoneNumberValidator]
+        [RegularExpression(@"^[6-9]\d{9}$",ErrorMessage ="Wrong Number Format")]       
         public string Number
         {
             get
