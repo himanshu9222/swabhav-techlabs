@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetStudent</title>
+</head>
+<body>
+    <div> 
+        @model StartMVC_App.Models.GetStudentViewModel
+        <h1>Address :</h1>
+        @foreach (var s in Model.Address)
+        {
+            <h2> @s </h2>
+        }
+        <h1>Students</h1>
+        @foreach(var s in Model.Students)
+        {
+            <h2> Name = @s.Name RollNo = @s.RollNo</h2>
+        }
+
+    </div>
+</body>
+</html>

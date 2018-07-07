@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ContactMVC_App.Models.Contact>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Home</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <p>
+        
+        @Html.ActionLink("Add New","Add","Contact")
+    </p>
+
+    <p>    
+        @if ((string)HttpContext.Current.Application["Login"] != "Guest") {
+      <input type="button" value="Logout" onclick="location.href='@Url.Action("Logout", "Login")'"   class="btn btn-default" />
+      @Html.Label((string)HttpContext.Current.Application["Login"]);
+        }
+        else
+        {
+            @Html.Label((string)HttpContext.Current.Application["Login"]);
+        }
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Number)
+            </th>
+            <th>
+                Edit
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Number)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {name = item.Name.ToString() }) 
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { name = item.Name.ToString() },new { onclick = "return confirm('Do you want to Delete?')"})
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

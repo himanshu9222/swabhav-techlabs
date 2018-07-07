@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model SampleLoginMvc.Models.LoginViewModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm("Login", "User"))
+        {@Html.ValidationSummary(true)
+            <p>
+                <div>
+                    @Html.Label("UserName:")
+                    @Html.TextBoxFor((m) => m.UserName)
+                    @Html.ValidationMessageFor((m) => m.UserName)
+                </div>
+                <div>
+                    @Html.Label("Password")
+                    @Html.PasswordFor((m) => m.Password)
+                    @Html.ValidationMessageFor((m) => m.Password)
+                </div>
+                @if (Model.LoginState) {
+                        <p style="color:green">@Model.Message </p>
+                }
+                else
+                {
+                    <p style="color:red">@Model.Message </p>
+                }
+            </p>
+
+            <input type="submit" />
+        }
+    </div>
+</body>
+</html>

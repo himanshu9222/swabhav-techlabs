@@ -1,0 +1,23 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model Session_App.Models.IndexViewModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h1>Application Count</h1>
+    <div>
+        <h1>Old Value  = @Model.OldCount</h1>
+        <h1>New Value  = @Model.NewCount</h1>
+    </div>
+
+    <p>@Html.ActionLink("Back","Index","Home")</p>
+</body>
+</html>

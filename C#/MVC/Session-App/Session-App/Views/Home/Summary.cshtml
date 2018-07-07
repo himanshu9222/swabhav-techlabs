@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model Session_App.Models.SummaryViewModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Summary</title>
+</head>
+<body>
+    <div> 
+        <h1>Application Count</h1>
+        
+        <h3>Value = @Model.ApplicationValue</h3>
+
+
+        <h1>Session Count</h1>
+
+        <h3>Value = @Model.SessionValue</h3>
+
+    </div>
+
+    <p>@Html.ActionLink("Back", "Index", "Home")</p>
+</body>
+</html>
