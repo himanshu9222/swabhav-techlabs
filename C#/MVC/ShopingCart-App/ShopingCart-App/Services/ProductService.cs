@@ -10,12 +10,9 @@ namespace ShopingCart_App.Services
     public class ProductService
     {
         private static List<Product> productList;
-        public List<SelectListItem> SelectedList { get; set; }
-        private Product _product;
-        private LineItem _lineItem;
-        private Order _order;
+        //public List<SelectListItem> SelectedList { get; set; }
 
-        public string ProductName { set; get; }
+        public string ProductPrice { set; get; }
         public int Quantity { set; get; }
 
         static ProductService()
@@ -24,18 +21,6 @@ namespace ShopingCart_App.Services
                                             new Product("Samsung",40000)};
         }
 
-        public Product Product
-        {
-            get
-            {
-                return _product;
-            }
-
-            set
-            {
-                _product = value;
-            }
-        }
 
         public List<Product> ProductList
         {
@@ -47,19 +32,6 @@ namespace ShopingCart_App.Services
             set
             {
                 productList = value;
-            }
-        }
-
-        public Order Order
-        {
-            get
-            {
-                return _order;
-            }
-
-            set
-            {
-                _order = value;
             }
         }
     }

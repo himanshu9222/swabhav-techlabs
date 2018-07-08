@@ -8,27 +8,8 @@ namespace ContactMVC_App.Services
 {
     public class LoginService
     {
-        private static Dictionary<string, string> _dictionary;
-
-        static LoginService()
-        {
-            _dictionary = new Dictionary<string, string>();
-            _dictionary.Add("root", "root");
-        }
-
-        public Dictionary<string, string> Dictionary
-        {
-            get
-            {
-                return _dictionary;
-            }
-
-            set
-            {
-                _dictionary = value;
-            }
-        }
-
+        private Dictionary<string, string> _dictionary = new Dictionary<string, string>() { { "root", "root" }};
+        
         public bool CheckCredentials(LoginViewModel vm)
         {
             try

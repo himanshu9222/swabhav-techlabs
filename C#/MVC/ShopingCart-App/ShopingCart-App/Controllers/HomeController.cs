@@ -23,7 +23,14 @@ namespace ShopingCart_App.Controllers
         public ActionResult Index(ProductService product)
         {
             List<SelectListItem> list = PopulateList();
-            
+            var selectedItem = ps.SelectedList.Find(p=>p.Value == product.ProductPrice.ToString());
+            if(selectedItem!= null)
+            {
+                foreach(var p in ps.ProductList)
+                {
+
+                }
+            }
 
             return View(list);
         }
