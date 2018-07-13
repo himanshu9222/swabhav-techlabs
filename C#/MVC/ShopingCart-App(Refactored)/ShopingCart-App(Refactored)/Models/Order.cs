@@ -7,81 +7,79 @@ namespace ShopingCart_App_Refactored_.Models
 {
     public class Order
     {
-        private static int totalNumberOfid;
-        private int id;
-        private List<LineItem> items = new List<LineItem>();
+        private Guid id;
+        private List<LineItem> LineItemList = new List<LineItem>();
         DateTime date = new DateTime();
-        private double totalPrice = 0;
-        LineItem lineItem;
-        Product product;
 
-        public int OrderId
+        public Guid OrderId
         {
-            get
-            {
-                return id;
-            }
-
-            set
-            {
-                id = value;
-            }
+            get { return id; }
+            set { id = value; }
         }
 
         public DateTime OrderDate
         {
-            get
-            {
-                return date;
-            }
-
-            set
-            {
-                date = value;
-            }
-        }
-
-        static Order()
-        {
-            totalNumberOfid = 0;
+            get { return date; }
+            set { date = value; }
         }
 
         public Order(DateTime date)
         {
             this.OrderDate = date;
-            OrderId = GenerateId();
+            OrderId = Guid.NewGuid();
         }
 
-        public void AddLineItem(LineItem item)
+        public void AddLineItem(LineItem item, List<LineItem> list)
         {
-            foreach (LineItem lineItem in items)
+            bool flag = false;
+            foreach (LineItem lineItem in list)
             {
-                if (lineItem.GetProduct().ProductId == item.GetProduct().ProductId)
+                if (lineItem.GetProduct().ProductName == item.GetProduct().ProductName)
                 {
-                    lineItem.AddQuantity(item.Quantity);
+                    lineItem.Quantity = lineItem.Quantity + item.Quantity;
+                    flag = true;
+                    break;
                 }
             }
-            items.Add(item);
-        }
-
-        public List<LineItem> GetLineItemsList()
-        {
-            return (List<LineItem>)items;
-        }
-
-        public double CheckOutPrice()
-        {
-            //LineItem lineItem=new LineItem();
-            foreach (LineItem item in items)
+            if (flag == false)
             {
-                totalPrice += item.GetLineItemCost();
+                LineItemList.Add(item);
+            }
+        }
+
+        public List<LineItem> LineItemsList
+        {
+            get { return (List<LineItem>)LineItemList; }
+            set { LineItemList = value; }
+        }
+
+        public double CheckOutPriceForItem()
+        {
+            double totalPrice = 0;
+            foreach (LineItem item in LineItemList)
+            {
+                totalPrice += item.GetLineItemCost;
             }
             return totalPrice;
         }
 
-        public int GenerateId()
+        public double CheckOutPrice
         {
-            return (++totalNumberOfid);
+            get { return CheckOutPriceForItem(); }
+        }
+        
+        public void DeleteLineItem(string name, List<LineItem> list)
+        {
+            int i = 0;
+            foreach (var lineItem in list)
+            {
+                if (lineItem.Product.ProductName == name)
+                {
+                    break;
+                }
+                i++;
+            }
+            list.RemoveAt(i);
         }
     }
 }

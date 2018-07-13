@@ -10,7 +10,7 @@ namespace ShopingCart_App_Refactored_.Models
         private static int totalNumberOfid;
 
         private int id;
-        Product product;
+        private Product product;
         private int quantity;
 
         public int GetLineId
@@ -39,6 +39,19 @@ namespace ShopingCart_App_Refactored_.Models
             }
         }
 
+        public Product Product
+        {
+            get
+            {
+                return product;
+            }
+
+            set
+            {
+                product = value;
+            }
+        }
+
         static LineItem()
         {
             totalNumberOfid = 0;
@@ -46,7 +59,7 @@ namespace ShopingCart_App_Refactored_.Models
 
         public LineItem(Product product, int quantity)
         {
-            this.product = product;
+            this.Product = product;
             this.Quantity = quantity;
             GetLineId = generateId();
         }
@@ -58,17 +71,20 @@ namespace ShopingCart_App_Refactored_.Models
 
         public double CalcItemCost()
         {
-            return product.ProductPrice * Quantity;
+            return Product.ProductPrice * Quantity;
         }
 
-        public double GetLineItemCost()
+        public double GetLineItemCost
         {
-            return CalcItemCost();
+            get
+            {
+                return CalcItemCost();
+            }
         }
 
         public Product GetProduct()
         {
-            return product;
+            return Product;
         }
 
         public void AddQuantity(int quantity)
