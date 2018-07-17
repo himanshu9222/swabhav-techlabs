@@ -11,56 +11,34 @@
     <meta name="viewport" content="width=device-width" />
     <title>Home</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
-
-    <style>
-        ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-color: #00FF00;
-        }
-
-        li {
-            float: left;
-        }
-
-            li a {
-                display: block;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
-            }
-
-                li a:hover {
-                    background-color: #111;
-                }
-    </style>
 </head>
 <body>
 
-    <ul>
-        <li>@Html.ActionLink("Add New", "Add", "Contact")</li>
-        @if ((string)Session["Login"] != "Guest")
-        {
-            <li>
-                <input type="button" value="Logout" onclick="location.href='@Url.Action("Logout", "Login")'" class="btn btn-default" />
-                @Html.Label((string)Session["Login"]);
-            </li>
-        }
-        else
-        {
-            <li> @Html.Label((string)Session["Login"]);</li>
-        }
-    </ul>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Add New", "Add", "Contact")</li>
+                @if ((string)Session["Login"] != "Guest")
+                {
+                    <li>
+                        <input type="button" value="Logout" onclick="location.href='@Url.Action("Logout", "Login")'" class="btn btn-default" />
+                        @Html.Label((string)Session["Login"])
+                    </li>
+                }
+                else
+                {
+                    <li> @Html.Label((string)Session["Login"])</li>
+                }
+            </ul>
+        </div>
+    </nav>
     <table class="table">
         <tr>
             <th>
-                @Html.Label("Name");
+                @Html.Label("Name")
             </th>
             <th>
-                @Html.Label("Number");
+                @Html.Label("Number")
             </th>
             <th>
                 Edit

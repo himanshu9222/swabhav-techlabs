@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CaptchaMvc.HtmlHelpers;
 
 namespace ContactMVC_With_EF.Controllers
 {
@@ -21,15 +22,16 @@ namespace ContactMVC_With_EF.Controllers
         public ActionResult LoginUser(LoginViewModel vm)
         {
             LoginService ls = new LoginService();
-            vm.Message = "Enter Proper Name and Password";
-            if (ModelState.IsValid)
+            vm.Message = "Enter Proper Captcha";
+            if (this.IsCaptchaValid("Invalid Captcha"))
             {
+                vm.Message = "Enter Proper Name and Password";
                 bool state = ls.CheckCredentials(vm);
                 if (state)
                 {
                     Session["Login"] = vm.Login.UserName;
+                    return RedirectToAction("Home", "Contact");
                 }
-                return RedirectToAction("Home", "Contact");
             }
 
             return View(vm);

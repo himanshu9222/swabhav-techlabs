@@ -1,0 +1,99 @@
+﻿@{
+    Layout = null;
+}
+@model Shoping_Cart.ViewModel.CartViewModel
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cart</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <h2 style="align-content:center">Shoping Cart App</h2>
+
+        <hr />
+
+        @using (Html.BeginForm("Cart", "Cart", FormMethod.Post))
+        {
+            <div>
+                <div>
+                    <label>Product :</label>
+                    @Html.DropDownListFor(m => m.ProductPrice, Model.Selectlist, "Please select")
+                </div>
+                <div>
+                    <label>Product :</label>
+                    @Html.TextBoxFor(m => m.Quantity)
+                </div>
+                <div>
+                    <input type="submit" value="Add" onclick="location.href='@Url.Action("Cart", "Cart")'" />
+                </div>
+            </div>
+            if (Model.Message != null)
+            {
+                <script type="text/javascript">
+                    window.onload = function () {
+                        alert("@Model.Message");
+                    };
+                </script>
+            }
+
+            <hr />
+            <table class="table">
+                <tr>
+                    <th>
+                        #
+                    </th>
+                    <th>
+                        Product
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <th>
+                        Total
+                    </th>
+                    <th>
+                        Remove
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.LineItemList)
+                {
+                    <tr>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Product.ProductId)
+                        </th>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Product.ProductName)
+                        </th>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Product.ProductPrice)
+                        </th>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </th>
+                        <th>
+                            @Html.DisplayFor(modelItem => item.GetLineItemCost)
+                        </th>
+                        <th>
+                            @Html.ActionLink("Delete", "Delete", new { name = item.Product.ProductName }, new { onclick = "return confirm('Do you want to Delete?')" })
+                        </th>
+                    </tr>
+                }
+
+            </table>
+
+            <div>
+                <input type="button" value="Checkout" onclick="location.href='@Url.Action("Checkout", "Cart")'" />
+            </div>
+        }
+
+    </div>
+</body>
+</html>

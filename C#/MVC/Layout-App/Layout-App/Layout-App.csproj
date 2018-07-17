@@ -9,12 +9,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6E4DC051-669F-4877-A13E-C5DF1E29EB92}</ProjectGuid>
+    <ProjectGuid>{D0D9638A-37F8-41FF-81C4-E01F404C837E}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ContactMVC_With_EF</RootNamespace>
-    <AssemblyName>ContactMVC_With_EF</AssemblyName>
+    <RootNamespace>Layout_App</RootNamespace>
+    <AssemblyName>Layout-App</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -43,18 +43,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
-      <HintPath>..\packages\CaptchaMvc.Mvc5.1.5.0\lib\net45-full\CaptchaMvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -140,41 +128,25 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="scripts\jquery-1.9.0.intellisense.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\jquery-1.9.0.js" />
     <Content Include="scripts\jquery-1.9.0.min.js" />
     <Content Include="Web.config" />
+    <Content Include="Views\Layout\Index.cshtml" />
+    <Content Include="Views\Layout\Home.cshtml" />
+    <Content Include="Views\Layout\About.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\ContactController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LayoutController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807140621207_CreateTableContact.cs" />
-    <Compile Include="Migrations\201807140621207_CreateTableContact.Designer.cs">
-      <DependentUpon>201807140621207_CreateTableContact.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201807140813596_UpdateTableLogin.cs" />
-    <Compile Include="Migrations\201807140813596_UpdateTableLogin.Designer.cs">
-      <DependentUpon>201807140813596_UpdateTableLogin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Contact.cs" />
-    <Compile Include="Models\Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositary\ContactDbContext.cs" />
-    <Compile Include="Repositary\ContactRepositary.cs" />
-    <Compile Include="Repositary\LoginRepository.cs" />
-    <Compile Include="Services\ContactService.cs" />
-    <Compile Include="Services\LoginService.cs" />
-    <Compile Include="ViewModel\AddViewModel.cs" />
-    <Compile Include="ViewModel\EditViewModel.cs" />
-    <Compile Include="ViewModel\HomeViewModel.cs" />
-    <Compile Include="ViewModel\LoginViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -182,10 +154,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Views\Contact\Home.cshtml" />
-    <Content Include="Views\Contact\Add.cshtml" />
-    <Content Include="Views\Contact\Edit.cshtml" />
-    <Content Include="Views\Login\LoginUser.cshtml" />
+    <Content Include="Views\Shared\LayoutMaster.cshtml" />
     <Content Include="scripts\jquery-1.9.0.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -196,14 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807140621207_CreateTableContact.resx">
-      <DependentUpon>201807140621207_CreateTableContact.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807140813596_UpdateTableLogin.resx">
-      <DependentUpon>201807140813596_UpdateTableLogin.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -218,9 +180,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>55345</DevelopmentServerPort>
+          <DevelopmentServerPort>52130</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:55345/</IISUrl>
+          <IISUrl>http://localhost:52130/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

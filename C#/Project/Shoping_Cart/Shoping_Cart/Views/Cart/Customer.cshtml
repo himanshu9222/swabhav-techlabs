@@ -2,7 +2,7 @@
     Layout = null;
 }
 
-@model ContactMVC_With_EF.ViewModel.LoginViewModel
+@model Shoping_Cart.ViewModel.CustomerViewModel
 @using CaptchaMvc.HtmlHelpers
 <!DOCTYPE html>
 
@@ -34,22 +34,22 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        <h2>Contact-App</h2>
-        <hr/>
+        <h2>ShopingCart-App</h2>
+        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <fieldset class="scheduler-border">
             <legend class="scheduler-border">Login</legend>
             <hr />
             <div class="control-group">
-                @Html.LabelFor(model => model.Login.UserName,new { @class = "control-label input-label"})
-                @Html.EditorFor(model => model.Login.UserName)
-                @Html.ValidationMessageFor(model => model.Login.UserName, "", new { @style = "color:red" })
+                @Html.LabelFor(model => model.Customer.CustomerUserId, new { @class = "control-label input-label" })
+                @Html.EditorFor(model => model.Customer.CustomerUserId)
+                @Html.ValidationMessageFor(model => model.Customer.CustomerUserId, "", new { @style = "color:red" })
             </div>
 
             <div class="control-group">
-                @Html.LabelFor(model => model.Login.Password, new { @class="control-label input-label"})
-                @Html.PasswordFor(model => model.Login.Password)
-                @Html.ValidationMessageFor(model => model.Login.Password, "", new { @style = "color:red" })
+                @Html.LabelFor(model => model.Customer.CustomerPassword, new { @class = "control-label input-label" })
+                @Html.PasswordFor(model => model.Customer.CustomerPassword)
+                @Html.ValidationMessageFor(model => model.Customer.CustomerPassword, "", new { @style = "color:red" })
             </div>
             <div>
                 @if (Model.LoginState)

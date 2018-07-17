@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Layout Master Page</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li>@Html.ActionLink("Home","Home")</li>
+                <li>@Html.ActionLink("Index", "Index")</li>
+                <li>@Html.ActionLink("About", "About")</li>
+            </ul>
+        </div>
+    </nav>
+    <section class="container body-content">
+        @RenderBody()
+    </section>
+    <footer>
+        <hr />
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+</body>
+</html>
