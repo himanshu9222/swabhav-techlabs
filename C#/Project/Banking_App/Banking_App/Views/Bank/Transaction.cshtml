@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Banking_App.ViewModel.TransactionViewModel
+
+<article>
+@using (Html.BeginForm())
+{
+    <h2>Transaction</h2>
+    @Html.Label("Amount")
+    @Html.TextBoxFor(m => m.TransactionAmount)
+    <br /> 
+    @Html.RadioButtonFor(m => m.TransactionType, "D")
+    @Html.Label("Deposit")
+    <br />
+    @Html.RadioButtonFor(m => m.TransactionType, "W")
+    @Html.Label("Wirhdraw")
+
+    <div>
+        @if (Model.Message != null)
+                {
+            <p style="color:red">@Model.Message </p>
+        }
+        
+    </div>
+    <div>
+        <input type="submit" value="Transact"  />
+    </div>
+}
+</article>
+

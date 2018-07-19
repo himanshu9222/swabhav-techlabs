@@ -1,0 +1,27 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@model Shoping_Cart_DTO.ViewModel.CheckoutViewModel
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Checkout</title>
+</head>
+<body>
+    <div>
+        <h2 style="align-content:center">CCAvenue Payment Portal</h2>
+        <hr />
+        <div>
+            <label>For User @Model.UserName</label>
+        </div>
+
+        <div>
+            <label>Total Amount To Pay: @Model.FinalPrice</label>
+        </div>
+        <input type="button" value="Pay">
+        @Html.ActionLink("Back", "Cart", "Cart")
+    </div>
+</body>
+</html>

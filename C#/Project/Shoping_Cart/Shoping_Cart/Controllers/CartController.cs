@@ -80,10 +80,10 @@ namespace Shoping_Cart.Controllers
                     " Price : " + selected.Value + " Quantity : " + cartViewModel.Quantity;
                 if (cartViewModel.Quantity != 0 && selected.Text != "Please select")
                 {
-                    var product = vm.ProductList.SingleOrDefault(m => m.ProductName == selected.Text);
+                    var product = productService.GetProduct(selected.Text);
 
                     order.AddLineItem(new LineItem
-                        (new Product(product.ProductId, selected.Text, double.Parse(selected.Value)),
+                        (product,
                         cartViewModel.Quantity), order.LineItemList);
 
                 }
@@ -125,8 +125,7 @@ namespace Shoping_Cart.Controllers
             vm.FinalPrice = order.CheckOutPrice;
             vm.UserName = customer.CustomerName;
             OrderRepository or = new OrderRepository();
-            order.C = customer;
-            or.Save(order);
+            or.PlaceOrderFor(customer.CustomerUserId, order);
             return View(vm);
         }
     }

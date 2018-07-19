@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Banking_App.ViewModel.AccountViewModel
+
+<article>
+    <h3>Account Details For @Model.User.UserName</h3>
+    <h3>Account Number = @Model.Account.AccountId</h3>
+    <h3>Balance = @Model.Account.Balance</h3>
+    <div>
+        <input type="button" value="Logout" onclick="location.href='@Url.Action("Logout", "Bank")'" />
+    </div>
+
+    <hr />
+    <table class="table">
+        <tr>
+            <th>
+                TransactionId
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Transaction Type
+            </th>
+            <th>
+                Transaction Date
+            </th>
+            <th>
+                Account Number
+            </th>
+        </tr>
+
+        @foreach (var item in Model.Account.TransactionList)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.TransactionId)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.TType)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.TDate)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Account.AccountId)
+                </th>
+            </tr>
+        }
+        </table>
+    <input type="button" value="Export to CSV" onclick="location.href='@Url.Action("Export", "Bank")'" />
+
+    <div>
+        <input type="button" value="Make Transaction" onclick="location.href='@Url.Action("Transaction", "Bank")'" />
+    </div>
+
+</article>
+

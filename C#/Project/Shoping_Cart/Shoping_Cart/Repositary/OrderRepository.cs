@@ -15,13 +15,12 @@ namespace Shoping_Cart.Repositary
             shopingDb = new ShopingDbContext();
         }
 
-        public void Save(Order order)
+        public void PlaceOrderFor(string Userid,Order order)
         {
-            shopingDb.Orders.Add(order);
-            foreach (LineItem item in order.LineItemList)
-            {
-                shopingDb.LineItems.Add(item);
-            }
+            var list = shopingDb.Customers.ToList();
+            var customer = list.SingleOrDefault(m => m.CustomerUserId == Userid);
+            customer.OrderList.Add(order);
+           
             shopingDb.SaveChanges();
         }
     }

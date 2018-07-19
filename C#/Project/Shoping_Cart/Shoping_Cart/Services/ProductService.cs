@@ -23,5 +23,10 @@ namespace Shoping_Cart.Services
             ProductList = productrepositary.FetchData();
             return ProductList;
         }
+
+        public Product GetProduct(string name)
+        {
+            return productrepositary.GetProduct(name);
+        }
     }
 }

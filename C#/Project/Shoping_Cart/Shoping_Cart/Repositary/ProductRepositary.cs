@@ -19,5 +19,12 @@ namespace Shoping_Cart.Repositary
         {
             return shopingDb.Products.ToList();
         }
+
+        public Product GetProduct(string name)
+        {
+            var list = shopingDb.Products.ToList();
+            var product = list.SingleOrDefault(m => m.ProductName == name);
+            return product;
+        }
     }
 }

@@ -1,0 +1,59 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Banking_App.ViewModel.AdminAccountViewModel
+
+<article>
+    <h2>Admin User</h2>
+    
+    <input type="button" value="Logout" onclick="location.href='@Url.Action("Logout", "Bank")'"/>
+    <table class="table">
+        <tr>
+            <th>
+                UserId
+            </th>
+            <th>
+                UserName
+            </th>
+            <th>
+                Role
+            </th>
+            <th>
+                AccountStatus
+            </th>
+            <th>
+                Change
+            </th>
+            <th>
+                Transaction
+            </th>
+        </tr>
+
+        @foreach (var item in Model.UserList)
+        {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.AccountStatus)
+                </th>
+                <th>
+                    @Html.ActionLink("ChangeAccountStatus","ChangeAccountStatus",new {id = item.UserId})
+                </th>
+                <th>
+                    @Html.ActionLink("View","ViewTransaction", new { id= item.UserId})
+                </th>
+            </tr>
+        }
+    </table>
+</article>
+
+
