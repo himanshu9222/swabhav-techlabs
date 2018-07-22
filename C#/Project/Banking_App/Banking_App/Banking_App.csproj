@@ -136,6 +136,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Image\purple-lonely-chair-website-header-design.jpg" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -180,6 +181,7 @@
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
     <Compile Include="ViewModel\AdminAccountViewModel.cs" />
+    <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\TransactionViewModel.cs" />
     <Compile Include="ViewModel\UserLoginViewModel.cs" />
   </ItemGroup>
@@ -197,6 +199,7 @@
     <Content Include="Views\Bank\Transaction.cshtml" />
     <Content Include="Views\Admin\AdminAccount.cshtml" />
     <Content Include="Views\Admin\ViewTransaction.cshtml" />
+    <Content Include="Views\Bank\Register.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

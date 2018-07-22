@@ -10,36 +10,50 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <fieldset class="scheduler-border">
-            <legend class="scheduler-border">Login</legend>
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <h3>Login</h3>
             <hr />
-            <div class="control-group">
-                @Html.LabelFor(model => model.User.UserId, new { @class = "control-label input-label" })
-                @Html.EditorFor(model => model.User.UserId)
-                @Html.ValidationMessageFor(model => model.Message, "", new { @style = "color:red" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UserId, "", new { @style = "color:red" })
+                </div>
             </div>
 
-            <div class="control-group">
-                @Html.LabelFor(model => model.User.Password, new { @class = "control-label input-label" })
-                @Html.PasswordFor(model => model.User.Password)
-                @Html.ValidationMessageFor(model => model.Message, "", new { @style = "color:red" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control text-box single-line" })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @style = "color:red" })
+                </div>
             </div>
-            
+
             <div>
-                @if (Model.LoginState)
+                <div class="col-md-offset-2 col-md-10">
+                    @if (Model.LoginState)
                 {
-                    <p style="color:red">@Model.Message </p>
-                }
-                
+                        <p style="color:red">@Model.Message </p>
+                    }
+                </div>
             </div>
-            <div class="control-group">
-                @Html.Captcha(6)
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.Captcha(6)
+                </div>
             </div>
-            <div class="control-group">
-                <input type="submit" value="LoginUser" class="btn btn-default" />
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="LoginUser" class="btn btn-default" />
+                    <input type="button" value="RegisterUser" class="btn btn-default" onclick="location.href='@Url.Action("Register", "Bank")'" />
+                </div>
             </div>
-        </fieldset>
+        </div>
     }
 
 </article>

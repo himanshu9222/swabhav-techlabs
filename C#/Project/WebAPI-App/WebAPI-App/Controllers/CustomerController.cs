@@ -8,21 +8,20 @@ using WebAPI_App.Services;
 
 namespace WebAPI_App.Controllers
 {
-    [RoutePrefix("api/Customer")]
+    [RoutePrefix("api/v1/techlabs/test/Customer")]
     public class CustomerController : ApiController
     {
         CustomerService cs = new CustomerService();
         
-
-        [System.Web.Http.Route("GetAllCustomers")]
+        [Route("GetAllCustomers")]
         public IHttpActionResult Get()
         {
-            var customer = cs.GetAllCustomer();
+            var customer = cs.CustomerList;
             return Ok(customer);
         }
 
         [Route("GetAllCustomers/{customerId}")]
-        public IHttpActionResult GetStudent(int customerId)
+        public IHttpActionResult GetCustomer(int customerId)
         {
             if (customerId == 0)
                 return NotFound();

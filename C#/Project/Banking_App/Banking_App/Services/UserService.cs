@@ -10,18 +10,18 @@ namespace Banking_App.Services
 {
     public class UserService
     {
-        private readonly UserRepositary userRepo;
+        private readonly UserRepositary userRepositary;
 
         public UserService()
         {
-            userRepo = new UserRepositary(BankingDbContext.Instance);
+            userRepositary = new UserRepositary(BankingDbContext.Instance);
         }
 
         public bool CheckCredentials(UserLoginViewModel vm)
         {
             try
             {
-                if (userRepo.GetPassword(vm.User.UserId) == vm.User.Password)
+                if (userRepositary.GetPassword(vm.UserId) == vm.Password)
                 {
                     vm.Message = "Login Successful";
                     vm.LoginState = true;
@@ -37,12 +37,12 @@ namespace Banking_App.Services
 
         public User CurrentUser(string userName)
         {
-            return userRepo.GetUser(userName);
+            return userRepositary.GetUser(userName);
         }
 
         public Account GetAccount(User user)
         {
-            return userRepo.GetAccount(user);
+            return userRepositary.GetAccount(user);
         }
 
         public void Save(Account account ,User user,double amt,string type)
@@ -54,17 +54,27 @@ namespace Banking_App.Services
             }
             else
                 account.Balance = account.Balance - amt;
-            userRepo.Save();
+            userRepositary.Save();
         }
 
         public List<User> GetAllUser()
         {
-            return userRepo.GetAllUser();
+            return userRepositary.GetAllUser();
         }
 
         public void Save()
         {
-            userRepo.Save();
+            userRepositary.Save();
+        }
+
+        public void AddUser(RegisterViewModel vm)
+        {
+            vm.Role = "U";
+            vm.AccountStatus = "Active";
+            Account acc = new Account(vm.Balance);
+            User user = new User(vm.UserId, vm.UserName, vm.Password, vm.Role, vm.AccountStatus);
+            user.Account = acc;
+            userRepositary.AddUser(user);
         }
     }
 }

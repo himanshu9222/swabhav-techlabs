@@ -25,29 +25,52 @@ namespace Banking_App.Controllers
         [HttpPost]
         public ActionResult UserLogin(UserLoginViewModel vm)
         {
-            User user = userService.CurrentUser(vm.User.UserId);
 
-            if (HttpContext.Session["User"] == null)
+            if (ModelState.IsValid)
             {
-                HttpContext.Session["User"] = user.UserId;
-            }
-            vm.Message = "Enter Proper Captcha";
-            if (this.IsCaptchaValid("Invalid Captcha"))
-            {
-                vm.Message = "Enter Proper Name and Password";
-                if (userService.CheckCredentials(vm))
+                User user = userService.CurrentUser(vm.UserId);
+
+                if (HttpContext.Session["User"] == null)
                 {
-                    if (user.Role == "A")
-                    {
-                        return RedirectToAction("AdminAccount", "Admin");
-                    }
-                    if (user.AccountStatus == "InActive")
-                    {
-                        vm.Message = "Account is Locked";
-                        return View(vm);
-                    }
-                    return RedirectToAction("Account", "Bank");
+                    HttpContext.Session["User"] = user.UserId;
                 }
+                vm.Message = "Enter Proper Captcha";
+                if (this.IsCaptchaValid("Invalid Captcha"))
+                {
+                    vm.Message = "Enter Proper Name and Password";
+                    var state = userService.CheckCredentials(vm);
+                    if (state)
+                    {
+                        if (user.Role == "A")
+                        {
+                            return RedirectToAction("AdminAccount", "Admin");
+                        }
+                        if (user.AccountStatus == "InActive")
+                        {
+                            vm.Message = "Account is Locked";
+                            return View(vm);
+                        }
+                        return RedirectToAction("Account", "Bank");
+                    }
+                }
+            }
+            return View(vm);
+        }
+
+        [HttpGet]
+        public ActionResult Register()
+        {
+            RegisterViewModel vm = new RegisterViewModel(); 
+            return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult Register(RegisterViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                userService.AddUser(vm);
+                return RedirectToAction("UserLogin");
             }
             return View(vm);
         }
@@ -62,7 +85,7 @@ namespace Banking_App.Controllers
             string userId = (string)HttpContext.Session["User"];
             var user = userService.CurrentUser(userId);
             var account = userService.GetAccount(user);
-            account.TransactionList.OrderBy(m => m.TDate);
+
             AccountViewModel vm = new AccountViewModel();
             vm.User = user;
             vm.Account = user.Account;

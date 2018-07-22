@@ -1,0 +1,25 @@
+﻿<section>
+    <table class="table table-striped">
+        <tbody id="tableBody">
+            <tr>
+                <td>Id</td>
+                <td>Name</td>
+                <td>Password</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+            <tr ng-repeat="x in result">
+                <td>{{x.CustomerId}}</td>
+                <td>{{x.CustomerName}}</td>
+                <td>{{x.CustomerPassword}}</td>
+                <td>
+                    <button ng-click="goToEdit(x.CustomerId)" class='btn btn-default glyphicon glyphicon-wrench edit' value="{{x.CustomerId}}"></button>
+                </td>
+                <td>
+                    <button ng-click="deleteCustomer(x.CustomerId)" ng-controller="deleteCtrl" class='glyphicon glyphicon-trash' value="{{x.CustomerId}}"></button>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</section>

@@ -18,7 +18,7 @@ namespace Banking_App.Repositary
 
         public string GetPassword(string userName)
         {
-            var user = bankDb.Users.Where(m => m.UserId == "himanshu").Include(m => m.Account).First();
+            var user = bankDb.Users.Where(m => m.UserId == userName).Include(m => m.Account).First();
             return user.Password;
         }
 
@@ -44,7 +44,13 @@ namespace Banking_App.Repositary
 
         public List<User> GetAllUser()
         {
-            return bankDb.Users.Where(m => m.Role == "U").Include(m => m.Account).ToList();
+            return bankDb.Users.Where(m => m.Role == "U").Include(m => m.Account).OrderByDescending(m => m.Account.Balance).ToList();
+        }
+
+        public void AddUser(User user)
+        {
+            bankDb.Users.Add(user);
+            bankDb.SaveChanges();
         }
     }
 }
