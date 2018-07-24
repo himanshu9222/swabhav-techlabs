@@ -1,9 +1,5 @@
 ﻿using Banking_App.Services;
 using Banking_App.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Banking_App.Controllers
@@ -17,7 +13,7 @@ namespace Banking_App.Controllers
         {
             AdminAccountViewModel vm = new AdminAccountViewModel();
 
-            string userId = (string)HttpContext.Session["User"];
+            //string userId = (string)HttpContext.Session["User"];
             var userList = userService.GetAllUser();
             vm.UserList = userList;
 

@@ -1,8 +1,5 @@
 ﻿using Banking_App.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using CaptchaMvc.HtmlHelpers;
 using Banking_App.Services;
@@ -84,9 +81,9 @@ namespace Banking_App.Controllers
             }
             string userId = (string)HttpContext.Session["User"];
             var user = userService.CurrentUser(userId);
-            var account = userService.GetAccount(user);
+            userService.GetAccount(user);
 
-            AccountViewModel vm = new AccountViewModel();
+            var vm = new AccountViewModel();
             vm.User = user;
             vm.Account = user.Account;
             return View(vm);
@@ -109,14 +106,13 @@ namespace Banking_App.Controllers
             string userId = (string)HttpContext.Session["User"];
             var user = userService.CurrentUser(userId);
             var account = userService.GetAccount(user);
-            var flag = false;
 
-            if (vm.TransactionAmount != 0 && vm.TransactionType != null)
+            if (Math.Abs(vm.TransactionAmount) > 0 && vm.TransactionType != null)
             {
                 if (vm.TransactionType == "W")
                 {
                     var b = account.Balance - vm.TransactionAmount;
-                    flag = (b <= 0);
+                    var flag = (b <= 0);
                     if (flag)
                     {
                         vm.Message = "Insufficient balance";
@@ -144,7 +140,7 @@ namespace Banking_App.Controllers
 
             foreach (Transaction t in account.TransactionList)
             {
-                textWrite = textWrite + t.ToString();
+                textWrite = textWrite + t;
             }
 
             TextWriter writer =

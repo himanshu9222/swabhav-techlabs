@@ -1,20 +1,19 @@
-﻿using Banking_App.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace Banking_App.ViewModel
+namespace Banking_User.Models
 {
-    public class UserLoginViewModel
+    public class LoginViewModel
     {
         [Required(ErrorMessage = "UserId is Required")]
         public string UserId { get; set; }
         [Required(ErrorMessage = "Password is Required")]
         public string Password { get; set; }
         private string _message = null;
-        private bool _loginState ;
+        private bool _loginState;
 
         public bool LoginState
         {

@@ -2,7 +2,7 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model Banking_App.ViewModel.UserLoginViewModel
+@model Banking_User.Models.LoginViewModel
 @using CaptchaMvc.HtmlHelpers
 
 <article>
@@ -19,7 +19,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { placeholder = "Enter your email Id", @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.UserId, "", new { @style = "color:red" })
                 </div>
             </div>
@@ -50,11 +50,12 @@
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="LoginUser" class="btn btn-default" />
-                    <input type="button" value="RegisterUser" class="btn btn-default" onclick="location.href='@Url.Action("Register", "Bank")'" />
+                    <input type="button" value="RegisterUser" class="btn btn-default" onclick="location.href='@Url.Action("Register", "Login")'" />
                 </div>
             </div>
         </div>
     }
 
 </article>
+
 
