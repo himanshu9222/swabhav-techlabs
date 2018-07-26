@@ -38,6 +38,10 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LinqKit, Version=1.1.15.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.1.1.15\lib\net45\LinqKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -49,26 +53,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entity Framework\Repositary\BankingDbContext.cs" />
-    <Compile Include="Entity Framework\Repositary\UserRepositary.cs" />
+    <Compile Include="Entity Framework\ISpecification.cs" />
+    <Compile Include="Entity Framework\BankingDbContext.cs" />
+    <Compile Include="Entity Framework\Repositary\Disposable.cs" />
+    <Compile Include="Entity Framework\Repositary\Entity.cs" />
+    <Compile Include="Entity Framework\Repositary\EntityFrameworkRepositary.cs" />
+    <Compile Include="Entity Framework\Repositary\IRepositary.cs" />
+    <Compile Include="Entity Framework\Repositary\UnitOfWork.cs" />
+    <Compile Include="Entity Framework\Specification\FindByEmailSpecification.cs" />
+    <Compile Include="Entity Framework\Specification\UserSearchCriteria.cs" />
     <Compile Include="Enum\AccountStatus.cs" />
     <Compile Include="Enum\AccountType.cs" />
+    <Compile Include="Enum\AppointmentStatus.cs" />
     <Compile Include="Enum\TransactionType.cs" />
     <Compile Include="Enum\UserType.cs" />
-    <Compile Include="Migrations\201807230751328_CreateTable.cs" />
-    <Compile Include="Migrations\201807230751328_CreateTable.Designer.cs">
-      <DependentUpon>201807230751328_CreateTable.cs</DependentUpon>
+    <Compile Include="Migrations\201807250614372_Create_All_Table.cs" />
+    <Compile Include="Migrations\201807250614372_Create_All_Table.Designer.cs">
+      <DependentUpon>201807250614372_Create_All_Table.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807231049063_UpdateDAtaType.cs" />
-    <Compile Include="Migrations\201807231049063_UpdateDAtaType.Designer.cs">
-      <DependentUpon>201807231049063_UpdateDAtaType.cs</DependentUpon>
+    <Compile Include="Migrations\201807250740296_UpdateTable.cs" />
+    <Compile Include="Migrations\201807250740296_UpdateTable.Designer.cs">
+      <DependentUpon>201807250740296_UpdateTable.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201807231052179_Update.cs" />
-    <Compile Include="Migrations\201807231052179_Update.Designer.cs">
-      <DependentUpon>201807231052179_Update.cs</DependentUpon>
+    <Compile Include="Migrations\201807251016386_Update Account.cs" />
+    <Compile Include="Migrations\201807251016386_Update Account.Designer.cs">
+      <DependentUpon>201807251016386_Update Account.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807260718157_UpdateTransaction.cs" />
+    <Compile Include="Migrations\201807260718157_UpdateTransaction.Designer.cs">
+      <DependentUpon>201807260718157_UpdateTransaction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807260948110_Add_Table_Recipient_Appointment.cs" />
+    <Compile Include="Migrations\201807260948110_Add_Table_Recipient_Appointment.Designer.cs">
+      <DependentUpon>201807260948110_Add_Table_Recipient_Appointment.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Recipient.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -81,16 +103,23 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201807230751328_CreateTable.resx">
-      <DependentUpon>201807230751328_CreateTable.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807250614372_Create_All_Table.resx">
+      <DependentUpon>201807250614372_Create_All_Table.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807231049063_UpdateDAtaType.resx">
-      <DependentUpon>201807231049063_UpdateDAtaType.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807250740296_UpdateTable.resx">
+      <DependentUpon>201807250740296_UpdateTable.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201807231052179_Update.resx">
-      <DependentUpon>201807231052179_Update.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201807251016386_Update Account.resx">
+      <DependentUpon>201807251016386_Update Account.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807260718157_UpdateTransaction.resx">
+      <DependentUpon>201807260718157_UpdateTransaction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807260948110_Add_Table_Recipient_Appointment.resx">
+      <DependentUpon>201807260948110_Add_Table_Recipient_Appointment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

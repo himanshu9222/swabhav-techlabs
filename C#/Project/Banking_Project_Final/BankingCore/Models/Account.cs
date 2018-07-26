@@ -1,24 +1,19 @@
-﻿using BankingCore.Enum;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BankingCore.Entity_Framework.Repositary;
 
 namespace BankingCore.Models
 {
-    public class Account
+    public class Account : Entity
     {
-        [Key]
-        public Guid AccountId { get; set; }
         public string AccountType { get; set; }
         public double Balance { get; set; }
+        public User User { get; set; }
         public List<Transaction> TransactionList { get; set; }
 
         public Account(string acctType ,double balance)
         {
-            AccountId = Guid.NewGuid();
+            Id = Guid.NewGuid();
             TransactionList = new List<Transaction>();
             AccountType = acctType;
             Balance = balance;

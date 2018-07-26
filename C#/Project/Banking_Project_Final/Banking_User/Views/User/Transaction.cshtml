@@ -1,0 +1,80 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Banking_User.Models.TransactionViewModel
+
+@using (Html.BeginForm("Transaction", "User", FormMethod.Post))
+{
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+                <li class="navbar-text">@Html.ActionLink("Home", "Account", "User")</li>
+                <li class="navbar-text">@Html.ActionLink("Passbook", "Passbook", "User")</li>
+                <li class="navbar-text">@Html.ActionLink("Transaction", "Transaction", "User")</li>
+                <li class="navbar-text">@Html.ActionLink("Recipient", "Recipient", "User")</li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navbar-text">Signed in as @Model.UserName</li>
+                <li class="navbar-text"><input type="button" value="Logout" onclick="location.href = '@Url.Action("Logout", "User")'" /></li>
+            </ul>
+        </div>
+    </nav>
+    if (Model.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@Model.Message");
+            };
+        </script>
+    }
+
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true)
+
+        <div class="col-md-offset-2 col-md-10">
+            <table>
+                <tr>
+                    @Html.RadioButtonFor(x => x.AccountType, "CURRENT")
+                    @Html.Label("Current")
+                </tr>
+                <tr>
+                    @Html.RadioButtonFor(x => x.AccountType, "SAVING")
+                    @Html.Label("Saving")
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-md-offset-2 col-md-10">
+            <table>
+                <tr>
+                    @Html.RadioButtonFor(x => x.TransactionType, "DEPOSIT")
+                    @Html.Label("Deposit")
+                </tr>
+                <tr>
+                    @Html.RadioButtonFor(x => x.TransactionType, "WITHDRAW")
+                    @Html.Label("Withdraw")
+                </tr>
+            </table>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Amount, "", new { @style = "color:red" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Make Transaction" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+

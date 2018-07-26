@@ -5,59 +5,31 @@
 @model Banking_User.Models.AccountViewModel
 
 <article>
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-left">
-                <li class="navbar-text"><input type="button" value="Make Transaction" onclick="location.href='@Url.Action("Transaction", "Bank")'" /></li>
-                <li class="navbar-text"><input type="button" value="Export to CSV" onclick="location.href='@Url.Action("Export", "Bank")'" /></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="navbar-text">Signed in as @Model.UserName</li>
-                <li class="navbar-text"><input type="button" value="Logout" onclick="location.href='@Url.Action("Logout", "Bank")'" /></li>
-            </ul>
-        </div>
-    </nav>
+    @using (Html.BeginForm("Account", "User", FormMethod.Post))
+    {
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li class="navbar-text">@Html.ActionLink("Create Saving Account","Account", "User")</li>
+                    <li class="navbar-text">@Html.ActionLink("Passbook", "Passbook", "User")</li>
+                    <li class="navbar-text">@Html.ActionLink("Transaction", "Transaction", "User")</li>
+                    <li class="navbar-text">@Html.ActionLink("Recipient", "Recipient", "User")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="navbar-text">Signed in as @Model.UserName</li>
+                    <li class="navbar-text"><input type="button" value="Logout" onclick="location.href = '@Url.Action("Logout", "User")'"/></li>
+                </ul>
+            </div>
+        </nav>
 
-    <hr />
-    <table class="table">
-        <tr>
-            <th>
-                TransactionId
-            </th>
-            <th>
-                Amount
-            </th>
-            <th>
-                Transaction Type
-            </th>
-            <th>
-                Transaction Date
-            </th>
-            <th>
-                Account Number
-            </th>
-        </tr>
-
-        @foreach (var item in Model.TransactionList)
-        {
-            <tr>
-                <th>
-                    @Html.DisplayFor(modelItem => item.TransactionId)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelItem => item.TType)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelItem => item.TDate)
-                </th>
-                <th>
-                    @Html.DisplayFor(modelItem => item.Account.AccountId)
-                </th>
-            </tr>
-        }
-    </table>
-
+        <h3>Welcome To Our Banking Site</h3>
+        if (Model.Message != null)
+         {
+             <script type="text/javascript">
+                 window.onload = function() {
+                     alert("@Model.Message");
+                 };
+             </script>
+         }
+    }
 </article>

@@ -1,36 +1,34 @@
 ﻿using BankingCore.Entity_Framework.Repositary;
+using BankingCore.Entity_Framework.Specification;
 using BankingCore.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankingCore.Service
 {
     public class AuthenticationService
     {
-        private readonly UserRepositary userRepositary;
-
-        public AuthenticationService()
+        public bool CheckCredentials(string email, string password)
         {
-            userRepositary = new UserRepositary(BankingDbContext.Instance);
+            UserSearchCriteria criteria = new UserSearchCriteria { Email = email, Password = password };
+
+            EntityFrameworkRepositary<User> efr = new EntityFrameworkRepositary<User>();
+            User user = efr.Find(new FindByEmailSpecification(criteria)).SingleOrDefault();
+
+            if (user == null)
+                return false;
+            return true;
         }
 
-        public bool CheckCredentials(string gmail, string password)
+        public User GetUser(string email)
         {
-            try
-            {
-                if (userRepositary.GetPassword(gmail) == password)
-                {
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+            UserSearchCriteria criteria = new UserSearchCriteria { Email = email };
+            EntityFrameworkRepositary<User> efr = new EntityFrameworkRepositary<User>();
+            User user = efr.Find(new FindByEmailSpecification(criteria)).SingleOrDefault();
+
+            if (user == null)
+                return null;
+            else
+                return user;
         }
     }
 }

@@ -3,7 +3,7 @@ namespace BankingCore.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CreateTable : DbMigration
+    public partial class Create_All_Table : DbMigration
     {
         public override void Up()
         {
@@ -12,7 +12,7 @@ namespace BankingCore.Migrations
                 c => new
                     {
                         AccountId = c.Guid(nullable: false),
-                        AccountType = c.Int(nullable: false),
+                        AccountType = c.String(),
                         Balance = c.Double(nullable: false),
                     })
                 .PrimaryKey(t => t.AccountId);
@@ -35,18 +35,20 @@ namespace BankingCore.Migrations
                 "dbo.Users",
                 c => new
                     {
-                        Gmail = c.String(nullable: false, maxLength: 128),
+                        Id = c.Guid(nullable: false),
+                        Gmail = c.String(maxLength: 100),
                         Name = c.String(),
                         Password = c.String(),
                         Age = c.Int(nullable: false),
-                        Gender = c.Int(nullable: false),
-                        Verified = c.Boolean(nullable: false),
-                        Role = c.Int(nullable: false),
-                        AccountStatus = c.Int(nullable: false),
+                        Gender = c.String(),
+                        Verified = c.String(),
+                        Role = c.String(),
+                        AccountStatus = c.String(),
                         Account_AccountId = c.Guid(),
                     })
-                .PrimaryKey(t => t.Gmail)
+                .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Accounts", t => t.Account_AccountId)
+                .Index(t => t.Gmail, unique: true)
                 .Index(t => t.Account_AccountId);
             
         }
@@ -56,6 +58,7 @@ namespace BankingCore.Migrations
             DropForeignKey("dbo.Users", "Account_AccountId", "dbo.Accounts");
             DropForeignKey("dbo.Transactions", "Account_AccountId", "dbo.Accounts");
             DropIndex("dbo.Users", new[] { "Account_AccountId" });
+            DropIndex("dbo.Users", new[] { "Gmail" });
             DropIndex("dbo.Transactions", new[] { "Account_AccountId" });
             DropTable("dbo.Users");
             DropTable("dbo.Transactions");

@@ -7,13 +7,13 @@ namespace BankingCore.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class CreateTable : IMigrationMetadata
+    public sealed partial class Add_Table_Recipient_Appointment : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateTable));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Add_Table_Recipient_Appointment));
         
         string IMigrationMetadata.Id
         {
-            get { return "201807230751328_CreateTable"; }
+            get { return "201807260948110_Add_Table_Recipient_Appointment"; }
         }
         
         string IMigrationMetadata.Source

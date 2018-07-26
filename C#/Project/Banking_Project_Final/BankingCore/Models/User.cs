@@ -1,16 +1,15 @@
-﻿using BankingCore.Enum;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using BankingCore.Entity_Framework.Repositary;
 
 namespace BankingCore.Models
 {
-    public class User
+    public class User : Entity
     {
-        [Key]
+        [StringLength(100)]
+        [Index(IsUnique = true)]
         public string Gmail { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
@@ -19,10 +18,12 @@ namespace BankingCore.Models
         public string Verified { get; set; }
         public string Role { get; set; }
         public string AccountStatus { set; get; }
-        public Account Account { get; set; }
+        public List<Recipient> RecipientList { get; set; } 
+        public List<Appointment> AppointmentList { get; set; } 
 
-        public User(string gmail, string name, string password ,int age, string gender, string role, string acctStatus , string verify)
+        public User(string gmail, string name, string password, int age, string gender, string role, string acctStatus, string verify)
         {
+            Id = Guid.NewGuid();
             Gmail = gmail;
             Name = name;
             Password = password;
@@ -31,6 +32,7 @@ namespace BankingCore.Models
             Role = role;
             Verified = verify;
             AccountStatus = acctStatus;
+            RecipientList = new List<Recipient>();
         }
 
         public User()

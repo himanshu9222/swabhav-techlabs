@@ -9,6 +9,7 @@ namespace Banking_User.Models
     public class AccountViewModel
     {
         public string UserName { get; set; }
+        public string Message { get; set; }
         public List<Transaction> TransactionList { get; set; }
 
         public AccountViewModel()
